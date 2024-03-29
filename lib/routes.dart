@@ -8,8 +8,8 @@ import 'package:flutter_haokezu/pages/room_detail/index.dart';
 
 class Routes {
   // 1、定义路由名称
-  static String home = '/home';
-  static String login = '/';
+  static String home = '/';
+  static String login = '/login';
   static String roomDetail = '/roomDetail/:roomId';
   static String register = '/register';
 
