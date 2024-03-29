@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
         items: tabItems,
         currentIndex: selectIndex,
         onTap: onTabItemClick,
-        selectedItemColor: Colors.green,
+        selectedItemColor: Theme.of(context).colorScheme.primary,
       ),
     );
   }

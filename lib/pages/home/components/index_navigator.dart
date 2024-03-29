@@ -45,6 +45,7 @@ class IndexNavigator extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(top: 6, bottom: 6),
+      color: Colors.white,
       child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: items
