@@ -15,8 +15,16 @@ class MyApp extends StatelessWidget {
     Routes.configureRoutes(router);
     return MaterialApp(
       title: '好租客',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.green,
+        appBarTheme: const AppBarTheme(backgroundColor: Colors.green),
+        // 旧版写法
+        // primarySwatch: Colors.green,
+        // 新版写法
+        colorScheme: const ColorScheme.light(
+          // 修改亮色主题的主题颜色
+          primary: Colors.green,
+        ), // 设置AppBar的主题色
       ),
       onGenerateRoute: router.generator,
     );
