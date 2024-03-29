@@ -1,5 +1,6 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_haokezu/components/base_image.dart';
 
 List<String> images = [
   'https://img2.baidu.com/it/u=1028011339,1319212411&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=313',
@@ -28,11 +29,11 @@ class _BaseSwiperState extends State<BaseSwiper> {
         itemHeight: height,
         itemBuilder: (context, index) {
           final image = images[index];
-          // return Image.asset(
-          //   image,
-          //   fit: BoxFit.fill,
-          // );
-          return Image.network(image, fit: BoxFit.fill);
+          // return Image.network(image, fit: BoxFit.fill);
+          return BaseImage(
+            src: image,
+            fit: BoxFit.fill,
+          );
         },
         indicatorLayout: PageIndicatorLayout.COLOR,
         autoplay: true,

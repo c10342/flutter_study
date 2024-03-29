@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_haokezu/components/base_image.dart';
 import 'package:flutter_haokezu/routes.dart';
 
 class NavigatorItem {
@@ -54,7 +55,10 @@ class IndexNavigator extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
                       child: Column(children: [
-                        Image.asset(item.image, width: 47.5),
+                        BaseImage(
+                          src: item.image,
+                          width: 47.5,
+                        ),
                         Text(
                           item.title,
                           style: const TextStyle(
