@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_haokezu/components/base_list_view.dart';
 import 'package:flutter_haokezu/components/base_page_layout.dart';
 import 'package:flutter_haokezu/components/base_search_bar.dart';
 import 'package:flutter_haokezu/components/base_swiper.dart';
@@ -43,7 +44,7 @@ class _HomeViewState extends State<HomeView> {
         ),
       ),
       headerBgColor: Colors.white,
-      body: ListView(
+      body: BaseListView(
         children: const [
           BaseSwiper(),
           IndexNavigator(),

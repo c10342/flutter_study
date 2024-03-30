@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_haokezu/components/base_list_view.dart';
 import 'package:flutter_haokezu/components/base_page_layout.dart';
 import 'package:flutter_haokezu/components/base_search_bar.dart';
 import 'package:flutter_haokezu/pages/home/components/info_card.dart';
@@ -47,26 +48,16 @@ class _InfoViewState extends State<InfoView> {
   @override
   Widget build(BuildContext context) {
     return BasePageLayout(
+      pageBgColor: Colors.grey[200],
       header: const BaseSearchBar(),
-      // body: ListView.separated(
-      //   itemBuilder: (BuildContext context, int index) {
-      //     return InfoCard(item: list[index]);
-      //   },
-      //   //自定义分割线
-      //   separatorBuilder: (context, index) {
-      //     return Divider(thickness: 2, color: Colors.grey[300]);
-      //   },
-      //   itemCount: list.length,
-      // ),
-      body: ListView.builder(
-        itemBuilder: (BuildContext context, int index) {
-          return Container(
-            margin: const EdgeInsets.only(bottom: 10),
-            child: InfoCard(item: list[index]),
-          );
-        },
-        itemCount: list.length,
-      ),
+      body: BaseListViewBuilder(
+          list: list,
+          itemBuilder: (BuildContext context, InfoItem data, int index) {
+            return Container(
+              margin: const EdgeInsets.only(bottom: 10),
+              child: InfoCard(item: data),
+            );
+          }),
     );
   }
 }

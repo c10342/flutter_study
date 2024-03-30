@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_haokezu/components/base_input.dart';
+import 'package:flutter_haokezu/components/base_list_view.dart';
 import 'package:flutter_haokezu/components/base_page_layout.dart';
 import 'package:flutter_haokezu/routes.dart';
 
@@ -19,7 +20,7 @@ class _RegisterPageState extends State<RegisterPage> {
       body: SafeArea(
           minimum: const EdgeInsets.all(30),
           // ListView解决垂直高度不够，键盘弹起的时候
-          child: ListView(
+          child: BaseListView(
             children: [
               BaseInput(label: '用户名', placeholder: '请输入用户名'),
               const Padding(padding: EdgeInsets.all(10)),
