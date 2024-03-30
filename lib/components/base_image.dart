@@ -9,7 +9,8 @@ class BaseImage extends StatelessWidget {
   String src;
   double? width;
   BoxFit? fit;
-  BaseImage({super.key, required this.src, this.width, this.fit});
+  double? height;
+  BaseImage({super.key, required this.src, this.width, this.fit, this.height});
 
   @override
   Widget build(BuildContext context) {
@@ -20,12 +21,14 @@ class BaseImage extends StatelessWidget {
         errorWidget: (context, url, error) => const Icon(Icons.error),
         width: width,
         fit: fit,
+        height: height,
       );
     } else if (localUrl.hasMatch(src)) {
       return Image.asset(
         src,
         width: width,
         fit: fit,
+        height: height,
       );
     }
     // 断言，false，表示失败

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_haokezu/components/page_content.dart';
 import 'package:flutter_haokezu/pages/home/components/info_card.dart';
 
 List<InfoItem> list = [
@@ -36,38 +34,37 @@ List<InfoItem> list = [
       time: "两天前")
 ];
 
-class InfoView extends StatefulWidget {
-  const InfoView({super.key});
+class IndexInfo extends StatefulWidget {
+  const IndexInfo({super.key});
 
   @override
-  State<InfoView> createState() => _InfoViewState();
+  State<IndexInfo> createState() => _IndexInfoState();
 }
 
-class _InfoViewState extends State<InfoView> {
+class _IndexInfoState extends State<IndexInfo> {
   @override
   Widget build(BuildContext context) {
-    return PageContent(
-      backgroundColor: Colors.grey[100],
-      title: '资讯',
-      // child: ListView.separated(
-      //   itemBuilder: (BuildContext context, int index) {
-      //     return InfoCard(item: list[index]);
-      //   },
-      //   //自定义分割线
-      //   separatorBuilder: (context, index) {
-      //     return Divider(thickness: 2, color: Colors.grey[300]);
-      //   },
-      //   itemCount: list.length,
-      // ),
-      child: ListView.builder(
-        itemBuilder: (BuildContext context, int index) {
-          return Container(
-            margin: const EdgeInsets.only(bottom: 10),
-            child: InfoCard(item: list[index]),
-          );
-        },
-        itemCount: list.length,
-      ),
+    return Column(
+      children: [
+        Container(
+          alignment: Alignment.centerLeft,
+          padding: const EdgeInsets.all(10),
+          child: const Text(
+            '最新资讯',
+            style: TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
+          ),
+        ),
+        Column(
+          children: list.asMap().keys.map((index) {
+            InfoItem item = list[index];
+            return Container(
+              margin: EdgeInsets.only(
+                  top: index == 0 ? 0 : 10, left: 10, right: 10),
+              child: InfoCard(item: item),
+            );
+          }).toList(),
+        )
+      ],
     );
   }
 }
