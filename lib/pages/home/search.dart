@@ -51,9 +51,6 @@ class _SearchViewState extends State<SearchView> {
         backgroundColor: Colors.grey[200],
         appBar: AppBar(
           title: BaseSearchBar(
-            onClick: () {
-              Navigator.of(context).pushNamed('search');
-            },
             left: Container(
               margin: const EdgeInsets.only(right: 10),
               child: Row(

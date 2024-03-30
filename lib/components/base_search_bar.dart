@@ -11,7 +11,7 @@ class BaseSearchBar extends StatefulWidget {
       this.left,
       this.right,
       this.onClick,
-      this.defaultValue = '请输入搜索词',
+      this.defaultValue,
       this.onSearch});
 
   @override
@@ -43,60 +43,57 @@ class _BaseSearchBarState extends State<BaseSearchBar> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         if (widget.left != null) widget.left!,
-        GestureDetector(
-          onTap: () {
-            if (widget.onClick != null) {
-              _focus.unfocus();
-              widget.onClick!();
-            }
-          },
-          child: Expanded(
-              child: Container(
-            height: 34,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(17),
-                color: Colors.grey[200]),
-            child: TextField(
-              focusNode: _focus,
-              controller: _controller,
-              onChanged: ((value) {
-                setState(() {
-                  _searchValue = value;
-                });
-              }),
-              onSubmitted: (value) {
-                if (widget.onSearch != null) {
-                  widget.onSearch!();
-                }
-              },
-              // 键盘变成搜索按钮
-              textInputAction: TextInputAction.search,
-              style: const TextStyle(fontSize: 14),
-              decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: '请输入搜索词',
-                  hintStyle: const TextStyle(color: Colors.grey, fontSize: 14),
-                  suffixIcon: _searchValue != ''
-                      ? GestureDetector(
-                          onTap: () {
-                            _onClear();
-                          },
-                          child: const Icon(
-                            Icons.clear,
-                            size: 18,
-                            color: Colors.grey,
-                          ),
-                        )
-                      : null,
-                  prefixIcon: const Icon(
-                    Icons.search,
-                    size: 18,
-                    color: Colors.grey,
-                  ),
-                  contentPadding: const EdgeInsets.only(top: 0.5)),
-            ),
-          )),
-        ),
+        Expanded(
+            child: Container(
+          height: 34,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(17), color: Colors.grey[200]),
+          child: TextField(
+            focusNode: _focus,
+            controller: _controller,
+            onChanged: ((value) {
+              setState(() {
+                _searchValue = value;
+              });
+            }),
+            onTap: () {
+              if (widget.onClick != null) {
+                _focus.unfocus();
+                widget.onClick!();
+              }
+            },
+            onSubmitted: (value) {
+              if (widget.onSearch != null) {
+                widget.onSearch!();
+              }
+            },
+            // 键盘变成搜索按钮
+            textInputAction: TextInputAction.search,
+            style: const TextStyle(fontSize: 14),
+            decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: '请输入搜索词',
+                hintStyle: const TextStyle(color: Colors.grey, fontSize: 14),
+                suffixIcon: _searchValue != ''
+                    ? GestureDetector(
+                        onTap: () {
+                          _onClear();
+                        },
+                        child: const Icon(
+                          Icons.clear,
+                          size: 18,
+                          color: Colors.grey,
+                        ),
+                      )
+                    : null,
+                prefixIcon: const Icon(
+                  Icons.search,
+                  size: 18,
+                  color: Colors.grey,
+                ),
+                contentPadding: const EdgeInsets.only(top: 0.2)),
+          ),
+        )),
         if (widget.right != null) widget.right!,
       ],
     );
