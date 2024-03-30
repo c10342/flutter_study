@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_haokezu/components/base_page_layout.dart';
 import 'package:flutter_haokezu/components/base_search_bar.dart';
 import 'package:flutter_haokezu/pages/home/components/info_card.dart';
 
@@ -45,10 +46,8 @@ class InfoView extends StatefulWidget {
 class _InfoViewState extends State<InfoView> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const BaseSearchBar(),
-      ),
+    return BasePageLayout(
+      header: const BaseSearchBar(),
       // body: ListView.separated(
       //   itemBuilder: (BuildContext context, int index) {
       //     return InfoCard(item: list[index]);

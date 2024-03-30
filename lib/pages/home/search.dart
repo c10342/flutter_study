@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_haokezu/components/base_page_layout.dart';
 import 'package:flutter_haokezu/components/base_search_bar.dart';
 import 'package:flutter_haokezu/pages/home/components/room_card.dart';
 
@@ -47,31 +48,29 @@ class SearchView extends StatefulWidget {
 class _SearchViewState extends State<SearchView> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.grey[200],
-        appBar: AppBar(
-          title: BaseSearchBar(
-            left: Container(
-              margin: const EdgeInsets.only(right: 10),
-              child: Row(
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(right: 4),
-                    child: Icon(
-                      Icons.room,
-                      size: 16,
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
+    return BasePageLayout(
+        pageBgColor: Colors.grey[200],
+        headerBgColor: Colors.white,
+        header: BaseSearchBar(
+          left: Container(
+            margin: const EdgeInsets.only(right: 10),
+            child: Row(
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(right: 4),
+                  child: Icon(
+                    Icons.room,
+                    size: 16,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
-                  const Text(
-                    '北京',
-                    style: TextStyle(fontSize: 16, color: Colors.black),
-                  ),
-                ],
-              ),
+                ),
+                const Text(
+                  '北京',
+                  style: TextStyle(fontSize: 16, color: Colors.black),
+                ),
+              ],
             ),
           ),
-          backgroundColor: Colors.white,
         ),
         body: ListView.builder(
           itemBuilder: (BuildContext context, int index) {

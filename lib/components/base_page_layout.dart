@@ -1,23 +1,43 @@
 import 'package:flutter/material.dart';
 
 class BasePageLayout extends StatelessWidget {
-  final String title;
-  final Widget? child;
+  final String? title;
+  final Widget? body;
+  final Widget? header;
+  final Widget? footer;
+  final List<Widget>? actions;
+  final Color? headerBgColor;
+  final Color? pageBgColor;
 
-  final Color? backgroundColor;
   const BasePageLayout(
-      {super.key, required this.title, this.child, this.backgroundColor});
+      {super.key,
+      this.title,
+      this.body,
+      this.headerBgColor,
+      this.header,
+      this.actions,
+      this.pageBgColor,
+      this.footer});
+
+  PreferredSizeWidget? buildAppBar() {
+    if (title != null ||
+        header != null ||
+        (actions != null && actions!.isNotEmpty)) {
+      return AppBar(
+        title: header ?? (title != null ? Text(title!) : null),
+        actions: actions,
+        backgroundColor: headerBgColor,
+      );
+    }
+    return null;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backgroundColor,
-      appBar: AppBar(
-        title: Text(title),
-        // 背景颜色：从 App 上下文中获取主题，使用主题中配置的颜色方案中的主要颜色
-        // backgroundColor: Theme.of(context).colorScheme.primary,
-      ),
-      body: child,
-    );
+        backgroundColor: pageBgColor,
+        appBar: buildAppBar(),
+        body: body,
+        bottomNavigationBar: footer);
   }
 }

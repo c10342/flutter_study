@@ -17,7 +17,7 @@ class _LoginPageState extends State<LoginPage> {
     return BasePageLayout(
       title: '登录',
       // 苹果安全区域
-      child: SafeArea(
+      body: SafeArea(
           minimum: const EdgeInsets.all(30),
           // ListView解决垂直高度不够，键盘弹起的时候
           child: ListView(
