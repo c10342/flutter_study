@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_haokezu/components/page_content.dart';
+import 'package:flutter_haokezu/components/base_page_layout.dart';
 
 class RoomDetailPage extends StatefulWidget {
   final String roomId;
@@ -12,6 +12,6 @@ class RoomDetailPage extends StatefulWidget {
 class _RoomDetailPageState extends State<RoomDetailPage> {
   @override
   Widget build(BuildContext context) {
-    return PageContent(title: 'roomId:${widget.roomId}');
+    return BasePageLayout(title: 'roomId:${widget.roomId}');
   }
 }

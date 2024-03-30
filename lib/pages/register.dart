@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_haokezu/components/base_input.dart';
-import 'package:flutter_haokezu/components/page_content.dart';
+import 'package:flutter_haokezu/components/base_page_layout.dart';
 import 'package:flutter_haokezu/routes.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -13,7 +13,7 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
-    return PageContent(
+    return BasePageLayout(
       title: '注册',
       // 苹果安全区域
       child: SafeArea(

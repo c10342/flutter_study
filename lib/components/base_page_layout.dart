@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class PageContent extends StatelessWidget {
+class BasePageLayout extends StatelessWidget {
   final String title;
   final Widget? child;
 
   final Color? backgroundColor;
-  const PageContent(
+  const BasePageLayout(
       {super.key, required this.title, this.child, this.backgroundColor});
 
   @override

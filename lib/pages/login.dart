@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_haokezu/components/base_input.dart';
-import 'package:flutter_haokezu/components/page_content.dart';
+import 'package:flutter_haokezu/components/base_page_layout.dart';
 import 'package:flutter_haokezu/routes.dart';
 
 class LoginPage extends StatefulWidget {
@@ -14,7 +14,7 @@ class _LoginPageState extends State<LoginPage> {
   bool showPassword = false;
   @override
   Widget build(BuildContext context) {
-    return PageContent(
+    return BasePageLayout(
       title: '登录',
       // 苹果安全区域
       child: SafeArea(

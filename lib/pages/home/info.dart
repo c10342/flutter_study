@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_haokezu/components/page_content.dart';
+import 'package:flutter_haokezu/components/base_page_layout.dart';
 import 'package:flutter_haokezu/pages/home/components/info_card.dart';
 
 List<InfoItem> list = [
@@ -46,7 +46,7 @@ class InfoView extends StatefulWidget {
 class _InfoViewState extends State<InfoView> {
   @override
   Widget build(BuildContext context) {
-    return PageContent(
+    return BasePageLayout(
       backgroundColor: Colors.grey[100],
       title: '资讯',
       // child: ListView.separated(
