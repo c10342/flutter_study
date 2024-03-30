@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_haokezu/components/base_search_bar.dart';
 import 'package:flutter_haokezu/components/base_swiper.dart';
 import 'package:flutter_haokezu/pages/home/components/index_info.dart';
 import 'package:flutter_haokezu/pages/home/components/index_navigator.dart';
@@ -17,9 +18,31 @@ class _HomeViewState extends State<HomeView> {
     return Scaffold(
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
-        title: const Text('顶部'),
-        // 背景颜色：从 App 上下文中获取主题，使用主题中配置的颜色方案中的主要颜色
-        // backgroundColor: Theme.of(context).colorScheme.primary,
+        title: BaseSearchBar(
+          onClick: () {
+            Navigator.of(context).pushNamed('search');
+          },
+          left: Container(
+            margin: const EdgeInsets.only(right: 10),
+            child: Row(
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(right: 4),
+                  child: Icon(
+                    Icons.room,
+                    size: 16,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
+                const Text(
+                  '北京',
+                  style: TextStyle(fontSize: 16, color: Colors.black),
+                ),
+              ],
+            ),
+          ),
+        ),
+        backgroundColor: Colors.white,
       ),
       body: ListView(
         children: const [

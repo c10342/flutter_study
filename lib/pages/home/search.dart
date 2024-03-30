@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_haokezu/components/base_search_bar.dart';
 import 'package:flutter_haokezu/pages/home/components/room_card.dart';
 
 List<RoomCardItem> list = [
@@ -49,7 +50,31 @@ class _SearchViewState extends State<SearchView> {
     return Scaffold(
         backgroundColor: Colors.grey[200],
         appBar: AppBar(
-          title: const Text('搜索'),
+          title: BaseSearchBar(
+            onClick: () {
+              Navigator.of(context).pushNamed('search');
+            },
+            left: Container(
+              margin: const EdgeInsets.only(right: 10),
+              child: Row(
+                children: [
+                  Container(
+                    margin: const EdgeInsets.only(right: 4),
+                    child: Icon(
+                      Icons.room,
+                      size: 16,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  ),
+                  const Text(
+                    '北京',
+                    style: TextStyle(fontSize: 16, color: Colors.black),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          backgroundColor: Colors.white,
         ),
         body: ListView.builder(
           itemBuilder: (BuildContext context, int index) {

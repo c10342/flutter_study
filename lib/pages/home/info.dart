@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_haokezu/components/base_page_layout.dart';
+import 'package:flutter_haokezu/components/base_search_bar.dart';
 import 'package:flutter_haokezu/pages/home/components/info_card.dart';
 
 List<InfoItem> list = [
@@ -46,10 +45,11 @@ class InfoView extends StatefulWidget {
 class _InfoViewState extends State<InfoView> {
   @override
   Widget build(BuildContext context) {
-    return BasePageLayout(
-      backgroundColor: Colors.grey[100],
-      title: '资讯',
-      // child: ListView.separated(
+    return Scaffold(
+      appBar: AppBar(
+        title: const BaseSearchBar(),
+      ),
+      // body: ListView.separated(
       //   itemBuilder: (BuildContext context, int index) {
       //     return InfoCard(item: list[index]);
       //   },
@@ -59,7 +59,7 @@ class _InfoViewState extends State<InfoView> {
       //   },
       //   itemCount: list.length,
       // ),
-      child: ListView.builder(
+      body: ListView.builder(
         itemBuilder: (BuildContext context, int index) {
           return Container(
             margin: const EdgeInsets.only(bottom: 10),
