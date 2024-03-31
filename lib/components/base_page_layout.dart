@@ -24,9 +24,16 @@ class BasePageLayout extends StatelessWidget {
         header != null ||
         (actions != null && actions!.isNotEmpty)) {
       return AppBar(
-        title: header ?? (title != null ? Text(title!) : null),
+        title: header ??
+            (title != null
+                ? Text(
+                    title!,
+                    style: const TextStyle(color: Colors.white),
+                  )
+                : null),
         actions: actions,
         backgroundColor: headerBgColor,
+        iconTheme: const IconThemeData(color: Colors.white),
       );
     }
     return null;
