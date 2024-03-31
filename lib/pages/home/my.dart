@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_haokezu/components/base_list_view.dart';
 import 'package:flutter_haokezu/components/base_page_layout.dart';
+import 'package:flutter_haokezu/pages/home/components/index_info.dart';
+import 'package:flutter_haokezu/pages/home/components/my_advertisement.dart';
+import 'package:flutter_haokezu/pages/home/components/my_function.dart';
 import 'package:flutter_haokezu/pages/home/components/my_info.dart';
 
 class MyView extends StatefulWidget {
@@ -25,7 +28,12 @@ class _MyViewState extends State<MyView> {
             ))
       ],
       body: BaseListView(
-        children: [const MyInfo()],
+        children: const [
+          MyInfo(),
+          MyFunction(),
+          MyAdvertisement(),
+          IndexInfo()
+        ],
       ),
     );
   }
