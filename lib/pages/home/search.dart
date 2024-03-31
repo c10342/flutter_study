@@ -3,6 +3,7 @@ import 'package:flutter_haokezu/components/base_list_view.dart';
 import 'package:flutter_haokezu/components/base_page_layout.dart';
 import 'package:flutter_haokezu/components/base_search_bar.dart';
 import 'package:flutter_haokezu/pages/home/components/room_card.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class SearchView extends StatefulWidget {
   const SearchView({super.key});
@@ -13,6 +14,9 @@ class SearchView extends StatefulWidget {
 
 class _SearchViewState extends State<SearchView> {
   List<RoomCardItem> list = [];
+
+  RefreshController refreshController =
+      RefreshController(initialRefresh: false);
 
   @override
   void initState() {
@@ -56,14 +60,15 @@ class _SearchViewState extends State<SearchView> {
         ),
       ),
       body: BaseListViewBuilder(
-          onRefresh: (success, failed) async {
+          onRefresh: () async {
             await Future.delayed(Duration(milliseconds: 1000));
-            success();
+            refreshController.refreshCompleted();
           },
-          onLoading: (success, failed) async {
+          onLoading: () async {
             await Future.delayed(Duration(milliseconds: 1000));
-            success();
+            refreshController.loadComplete();
           },
+          refreshController: refreshController,
           list: list,
           itemBuilder: (BuildContext context, RoomCardItem data, int index) {
             return Container(

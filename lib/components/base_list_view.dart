@@ -1,55 +1,29 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-
-typedef VoidCallback = void Function();
 
 class BaseListViewBuilder<T> extends StatelessWidget {
   List<T> list;
   Widget? Function(BuildContext context, T data, int index) itemBuilder;
-  void Function(VoidCallback success, VoidCallback failed)? onRefresh;
-  void Function(Function({bool? noData}) success, VoidCallback failed)?
-      onLoading;
+  void Function() onRefresh;
+  void Function() onLoading;
+  RefreshController refreshController;
 
-  final RefreshController refreshController =
-      RefreshController(initialRefresh: false);
   BaseListViewBuilder(
       {super.key,
       required this.list,
       required this.itemBuilder,
-      this.onRefresh,
-      this.onLoading});
-
-  void _onRefresh() {
-    if (onRefresh != null) {
-      onRefresh!(() {
-        refreshController.refreshCompleted();
-      }, () {
-        refreshController.refreshFailed();
-      });
-    }
-  }
-
-  void _onLoading() {
-    if (onLoading != null) {
-      onLoading!(({bool? noData}) {
-        if (noData == true) {
-          refreshController.loadNoData();
-        } else {
-          refreshController.loadComplete();
-        }
-      }, () {
-        refreshController.loadFailed();
-      });
-    }
-  }
+      required this.onRefresh,
+      required this.onLoading,
+      required this.refreshController});
 
   @override
   Widget build(BuildContext context) {
     return SmartRefresher(
-      enablePullDown: onRefresh != null,
-      enablePullUp: onLoading != null,
+      enablePullDown: true,
+      enablePullUp: true,
       header: const WaterDropHeader(),
       footer: CustomFooter(
         builder: (context, mode) {
@@ -69,14 +43,21 @@ class BaseListViewBuilder<T> extends StatelessWidget {
         },
       ),
       controller: refreshController,
-      onRefresh: _onRefresh,
-      onLoading: _onLoading,
-      child: ListView.builder(
-          itemBuilder: (BuildContext context, int index) {
-            return itemBuilder(context, list[index], index);
-          },
-          itemCount: list.length,
-          physics: const BouncingScrollPhysics()),
+      onRefresh: onRefresh,
+      onLoading: onLoading,
+      child: list.isEmpty
+          ? const Center(
+              child: Text(
+                '暂无数据',
+                style: TextStyle(color: Colors.black),
+              ),
+            )
+          : ListView.builder(
+              itemBuilder: (BuildContext context, int index) {
+                return itemBuilder(context, list[index], index);
+              },
+              itemCount: list.length,
+              physics: const ClampingScrollPhysics()),
     );
   }
 }
@@ -88,9 +69,12 @@ class BaseListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-        // physics: const ClampingScrollPhysics(),
-        physics: const BouncingScrollPhysics(),
-        children: children!);
+    // 处理ClampingScrollPhysics下拉或者上拉，元素会放大
+    return ScrollConfiguration(
+        behavior: const ScrollBehavior(),
+        child: ListView(
+            // physics: const ClampingScrollPhysics(),
+            // physics: const BouncingScrollPhysics(),
+            children: children!));
   }
 }
