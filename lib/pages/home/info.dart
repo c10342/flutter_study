@@ -1,13 +1,16 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_haokezu/components/base_list_view.dart';
 import 'package:flutter_haokezu/components/base_page_layout.dart';
 import 'package:flutter_haokezu/components/base_search_bar.dart';
 import 'package:flutter_haokezu/pages/home/components/info_card.dart';
-import 'package:flutter_haokezu/routes.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class InfoView extends StatefulWidget {
-  const InfoView({super.key});
+  int activeIndex;
+  int index;
+  InfoView({super.key, required this.activeIndex, required this.index});
 
   @override
   State<InfoView> createState() => _InfoViewState();
@@ -26,6 +29,7 @@ class _InfoViewState extends State<InfoView>
   void initState() {
     super.initState();
     getList();
+    print('initState');
   }
 
   Future getList() async {

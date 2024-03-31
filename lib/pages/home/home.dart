@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_haokezu/components/base_list_view.dart';
 import 'package:flutter_haokezu/components/base_page_layout.dart';
@@ -6,9 +8,19 @@ import 'package:flutter_haokezu/components/base_swiper.dart';
 import 'package:flutter_haokezu/pages/home/components/index_info.dart';
 import 'package:flutter_haokezu/pages/home/components/index_navigator.dart';
 import 'package:flutter_haokezu/pages/home/components/index_recommend.dart';
+import 'package:flutter_haokezu/pages/home/index.dart';
 
 class HomeView extends StatefulWidget {
-  const HomeView({super.key});
+  int activeIndex;
+  int index;
+  Function(UpdateCallback cb) addUpdateCallback;
+  Function(UpdateCallback cb) removeUpdateCallback;
+  HomeView(
+      {super.key,
+      required this.activeIndex,
+      required this.index,
+      required this.addUpdateCallback,
+      required this.removeUpdateCallback});
 
   @override
   State<HomeView> createState() => _HomeViewState();
@@ -18,6 +30,26 @@ class _HomeViewState extends State<HomeView>
     with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
+
+  void update(int activeIndex, ActiveType type) {
+    if (activeIndex == widget.index && type == ActiveType.Show) {
+      print('home-显示');
+    } else {
+      print('home-隐藏');
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    widget.addUpdateCallback(update);
+  }
+
+  @override
+  void dispose() {
+    widget.removeUpdateCallback(update);
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

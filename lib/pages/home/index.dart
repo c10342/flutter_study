@@ -13,6 +13,10 @@ List<BottomNavigationBarItem> tabItems = [
   const BottomNavigationBarItem(icon: Icon(Icons.account_circle), label: '我的'),
 ];
 
+enum ActiveType { Show, Hide }
+
+typedef UpdateCallback = Function(int activeIndex, ActiveType type);
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -23,6 +27,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends RouteLifeState<HomePage> {
   int selectIndex = 0;
   late PageController _pageController;
+  List<UpdateCallback> updateCallback = [];
 
   @override
   void didPush() {
@@ -37,11 +42,13 @@ class _HomePageState extends RouteLifeState<HomePage> {
   @override
   void didPopNext() {
     print('上一个页面关闭而显示');
+    runUpdateCallback(selectIndex, ActiveType.Show);
   }
 
   @override
   void didPushNext() {
     print('跳转下一个页面而隐藏');
+    runUpdateCallback(selectIndex, ActiveType.Hide);
   }
 
   @override
@@ -57,6 +64,21 @@ class _HomePageState extends RouteLifeState<HomePage> {
     _pageController.jumpToPage(index);
   }
 
+  void runUpdateCallback(int activeIndex, ActiveType type) {
+    List<UpdateCallback> cbs = [...updateCallback];
+    for (var cb in cbs) {
+      cb(activeIndex, type);
+    }
+  }
+
+  void addUpdateCallback(UpdateCallback cb) {
+    updateCallback.add(cb);
+  }
+
+  void removeUpdateCallback(UpdateCallback cb) {
+    updateCallback.remove(cb);
+  }
+
   @override
   Widget build(BuildContext context) {
     return BasePageLayout(
@@ -64,12 +86,25 @@ class _HomePageState extends RouteLifeState<HomePage> {
       // 缓存页面-懒加载，配合 AutomaticKeepAliveClientMixin 一起使用
       body: PageView(
         controller: _pageController,
-        children: const [
-          HomeView(),
-          SearchView(),
-          InfoView(),
-          MyView(),
+        children: [
+          HomeView(
+              activeIndex: selectIndex,
+              index: 0,
+              addUpdateCallback: addUpdateCallback,
+              removeUpdateCallback: removeUpdateCallback),
+          SearchView(
+            activeIndex: selectIndex,
+            index: 1,
+          ),
+          InfoView(
+            activeIndex: selectIndex,
+            index: 2,
+          ),
+          const MyView(),
         ],
+        onPageChanged: (value) {
+          runUpdateCallback(value, ActiveType.Show);
+        },
       ),
       // 缓存页面，缺点-一次性加载所有页面
       // body: IndexedStack(index: selectIndex, children: tabViews),

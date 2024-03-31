@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_haokezu/components/base_list_view.dart';
 import 'package:flutter_haokezu/components/base_page_layout.dart';
@@ -6,7 +8,9 @@ import 'package:flutter_haokezu/pages/home/components/room_card.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class SearchView extends StatefulWidget {
-  const SearchView({super.key});
+  int activeIndex;
+  int index;
+  SearchView({super.key, required this.activeIndex, required this.index});
 
   @override
   State<SearchView> createState() => _SearchViewState();
