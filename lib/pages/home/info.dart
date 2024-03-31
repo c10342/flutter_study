@@ -13,7 +13,7 @@ class InfoView extends StatefulWidget {
   State<InfoView> createState() => _InfoViewState();
 }
 
-class _InfoViewState extends RouteLifeState<InfoView>
+class _InfoViewState extends State<InfoView>
     with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
@@ -21,26 +21,6 @@ class _InfoViewState extends RouteLifeState<InfoView>
   RefreshController refreshController =
       RefreshController(initialRefresh: false);
   List<InfoItem> list = [];
-
-  @override
-  void didPush() {
-    print('_InfoViewState--跳转该页面而显示');
-  }
-
-  @override
-  void didPop() {
-    print('_InfoViewState--当前页面被pop而隐藏');
-  }
-
-  @override
-  void didPopNext() {
-    print('_InfoViewState--上一个页面关闭而显示');
-  }
-
-  @override
-  void didPushNext() {
-    print('_InfoViewState--跳转下一个页面而隐藏');
-  }
 
   @override
   void initState() {

@@ -4,13 +4,7 @@ import 'package:flutter_haokezu/pages/home/home.dart';
 import 'package:flutter_haokezu/pages/home/info.dart';
 import 'package:flutter_haokezu/pages/home/my.dart';
 import 'package:flutter_haokezu/pages/home/search.dart';
-
-List<Widget> tabViews = [
-  const HomeView(),
-  const SearchView(),
-  const InfoView(),
-  const MyView(),
-];
+import 'package:flutter_haokezu/routes.dart';
 
 List<BottomNavigationBarItem> tabItems = [
   const BottomNavigationBarItem(icon: Icon(Icons.home), label: '首页'),
@@ -26,9 +20,29 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends RouteLifeState<HomePage> {
   int selectIndex = 0;
   late PageController _pageController;
+
+  @override
+  void didPush() {
+    print('跳转该页面而显示');
+  }
+
+  @override
+  void didPop() {
+    print('当前页面被pop而隐藏');
+  }
+
+  @override
+  void didPopNext() {
+    print('上一个页面关闭而显示');
+  }
+
+  @override
+  void didPushNext() {
+    print('跳转下一个页面而隐藏');
+  }
 
   @override
   void initState() {
@@ -50,7 +64,12 @@ class _HomePageState extends State<HomePage> {
       // 缓存页面-懒加载，配合 AutomaticKeepAliveClientMixin 一起使用
       body: PageView(
         controller: _pageController,
-        children: tabViews,
+        children: const [
+          HomeView(),
+          SearchView(),
+          InfoView(),
+          MyView(),
+        ],
       ),
       // 缓存页面，缺点-一次性加载所有页面
       // body: IndexedStack(index: selectIndex, children: tabViews),
