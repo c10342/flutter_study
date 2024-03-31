@@ -12,11 +12,14 @@ class SearchView extends StatefulWidget {
   State<SearchView> createState() => _SearchViewState();
 }
 
-class _SearchViewState extends State<SearchView> {
+class _SearchViewState extends State<SearchView>
+    with AutomaticKeepAliveClientMixin {
   List<RoomCardItem> list = [];
 
   RefreshController refreshController =
       RefreshController(initialRefresh: false);
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   void initState() {
@@ -35,6 +38,7 @@ class _SearchViewState extends State<SearchView> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return BasePageLayout(
       pageBgColor: Colors.grey[200],
       headerBgColor: Colors.white,

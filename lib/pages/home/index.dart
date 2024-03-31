@@ -28,18 +28,32 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int selectIndex = 0;
+  late PageController _pageController;
+
+  @override
+  void initState() {
+    _pageController = PageController(initialPage: selectIndex);
+    super.initState();
+  }
+
   void onTabItemClick(int index) {
     setState(() {
       selectIndex = index;
     });
+    _pageController.jumpToPage(index);
   }
 
   @override
   Widget build(BuildContext context) {
     return BasePageLayout(
       // body: tabViews[selectIndex],
-      // 缓存页面
-      body: IndexedStack(index: selectIndex, children: tabViews),
+      // 缓存页面-懒加载，配合 AutomaticKeepAliveClientMixin 一起使用
+      body: PageView(
+        controller: _pageController,
+        children: tabViews,
+      ),
+      // 缓存页面，缺点-一次性加载所有页面
+      // body: IndexedStack(index: selectIndex, children: tabViews),
       footer: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         items: tabItems,

@@ -14,9 +14,13 @@ class MyView extends StatefulWidget {
   State<MyView> createState() => _MyViewState();
 }
 
-class _MyViewState extends State<MyView> {
+class _MyViewState extends State<MyView> with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return BasePageLayout(
       title: '我的',
       actions: [

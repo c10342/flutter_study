@@ -12,7 +12,10 @@ class InfoView extends StatefulWidget {
   State<InfoView> createState() => _InfoViewState();
 }
 
-class _InfoViewState extends State<InfoView> {
+class _InfoViewState extends State<InfoView>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
   RefreshController refreshController =
       RefreshController(initialRefresh: false);
   List<InfoItem> list = [];
@@ -42,6 +45,7 @@ class _InfoViewState extends State<InfoView> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return BasePageLayout(
       pageBgColor: Colors.grey[200],
       header: const BaseSearchBar(),
