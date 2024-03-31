@@ -37,6 +37,7 @@ mixin UpdateProviderMixin<T extends StatefulWidget> on State<T> {
     super.didChangeDependencies();
     UpdateProvider? updateProvider = UpdateProvider.of(context);
     if (updateProvider != null) {
+      updateProvider.removeUpdateCallback(update);
       updateProvider.addUpdateCallback(update);
     }
   }

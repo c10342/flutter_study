@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class BaseLoading {
-  static void show(BuildContext context) {
+  static Function show(BuildContext context) {
     showDialog(
         context: context,
         // 遮罩层背景色
@@ -17,9 +17,8 @@ class BaseLoading {
             ),
           );
         });
-  }
-
-  static void close(BuildContext context) {
-    Navigator.pop(context);
+    return () {
+      Navigator.pop(context);
+    };
   }
 }

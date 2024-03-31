@@ -7,6 +7,7 @@ import 'package:flutter_haokezu/components/base_page_layout.dart';
 import 'package:flutter_haokezu/components/base_search_bar.dart';
 import 'package:flutter_haokezu/pages/home/components/info_card.dart';
 import 'package:flutter_haokezu/pages/home/provider.dart';
+import 'package:flutter_haokezu/utils/loading.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class InfoView extends StatefulWidget {
@@ -27,10 +28,14 @@ class _InfoViewState extends State<InfoView>
       RefreshController(initialRefresh: false);
   List<InfoItem> list = [];
 
+  int pageIndex = 1;
+
   @override
   void initState() {
     super.initState();
-    getList();
+    Future.delayed(Duration.zero, () {
+      getList();
+    });
   }
 
   @override
@@ -40,11 +45,15 @@ class _InfoViewState extends State<InfoView>
     }
   }
 
-  Future getList() async {
-    await Future.delayed(Duration(milliseconds: 1000));
+  Future getList({bool showLoading = true}) async {
+    Function? close;
+    if (showLoading == true) {
+      close = BaseLoading.show(context);
+    }
+    await Future.delayed(const Duration(milliseconds: 1000));
     List<InfoItem> data = [];
     var random = Random();
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 10; i++) {
       int randomNumber = random.nextInt(100);
       data.add(InfoItem(
           title: '置业选择 | 安贞西里 三室一厅 河间的古雅别院--$randomNumber',
@@ -53,10 +62,23 @@ class _InfoViewState extends State<InfoView>
           source: "新华网",
           time: "两天前"));
     }
-    refreshController.loadNoData();
+    if (pageIndex == 0) {
+      refreshController.refreshCompleted();
+    } else if (pageIndex >= 3) {
+      refreshController.loadNoData();
+    } else {
+      refreshController.loadComplete();
+    }
     setState(() {
-      list = data;
+      if (pageIndex == 0) {
+        list = data;
+      } else {
+        list.addAll(data);
+      }
     });
+    if (close != null) {
+      close();
+    }
   }
 
   @override
@@ -67,11 +89,13 @@ class _InfoViewState extends State<InfoView>
       header: const BaseSearchBar(),
       body: BaseListViewBuilder(
           onRefresh: () async {
-            await getList();
-            refreshController.refreshCompleted();
+            refreshController.resetNoData();
+            pageIndex = 0;
+            await getList(showLoading: false);
           },
-          onLoading: () {
-            refreshController.loadComplete();
+          onLoading: () async {
+            pageIndex += 1;
+            await getList(showLoading: false);
           },
           refreshController: refreshController,
           list: list,
