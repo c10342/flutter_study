@@ -1,10 +1,12 @@
 // ignore_for_file: must_be_immutable
 
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_haokezu/components/base_list_view.dart';
 import 'package:flutter_haokezu/components/base_page_layout.dart';
 import 'package:flutter_haokezu/components/base_search_bar.dart';
 import 'package:flutter_haokezu/pages/home/components/info_card.dart';
+import 'package:flutter_haokezu/pages/home/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class InfoView extends StatefulWidget {
@@ -17,7 +19,7 @@ class InfoView extends StatefulWidget {
 }
 
 class _InfoViewState extends State<InfoView>
-    with AutomaticKeepAliveClientMixin {
+    with AutomaticKeepAliveClientMixin, UpdateProviderMixin {
   @override
   bool get wantKeepAlive => true;
 
@@ -29,15 +31,23 @@ class _InfoViewState extends State<InfoView>
   void initState() {
     super.initState();
     getList();
-    print('initState');
+  }
+
+  @override
+  void update(int activeIndex, ActiveType type) {
+    if (activeIndex == widget.index && type == ActiveType.Show) {
+      getList();
+    }
   }
 
   Future getList() async {
     await Future.delayed(Duration(milliseconds: 1000));
     List<InfoItem> data = [];
+    var random = Random();
     for (int i = 0; i < 3; i++) {
+      int randomNumber = random.nextInt(100);
       data.add(InfoItem(
-          title: '置业选择 | 安贞西里 三室一厅 河间的古雅别院',
+          title: '置业选择 | 安贞西里 三室一厅 河间的古雅别院--$randomNumber',
           imageUrl:
               'https://ke-image.ljcdn.com/110000-inspection/pc1_c48D9qbWV.jpg.280x210.jpg',
           source: "新华网",

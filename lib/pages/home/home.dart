@@ -8,47 +8,33 @@ import 'package:flutter_haokezu/components/base_swiper.dart';
 import 'package:flutter_haokezu/pages/home/components/index_info.dart';
 import 'package:flutter_haokezu/pages/home/components/index_navigator.dart';
 import 'package:flutter_haokezu/pages/home/components/index_recommend.dart';
-import 'package:flutter_haokezu/pages/home/index.dart';
+import 'package:flutter_haokezu/pages/home/provider.dart';
 
 class HomeView extends StatefulWidget {
   int activeIndex;
   int index;
-  Function(UpdateCallback cb) addUpdateCallback;
-  Function(UpdateCallback cb) removeUpdateCallback;
-  HomeView(
-      {super.key,
-      required this.activeIndex,
-      required this.index,
-      required this.addUpdateCallback,
-      required this.removeUpdateCallback});
+  HomeView({
+    super.key,
+    required this.activeIndex,
+    required this.index,
+  });
 
   @override
   State<HomeView> createState() => _HomeViewState();
 }
 
 class _HomeViewState extends State<HomeView>
-    with AutomaticKeepAliveClientMixin {
+    with AutomaticKeepAliveClientMixin, UpdateProviderMixin {
   @override
   bool get wantKeepAlive => true;
 
+  @override
   void update(int activeIndex, ActiveType type) {
     if (activeIndex == widget.index && type == ActiveType.Show) {
       print('home-显示');
     } else {
       print('home-隐藏');
     }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    widget.addUpdateCallback(update);
-  }
-
-  @override
-  void dispose() {
-    widget.removeUpdateCallback(update);
-    super.dispose();
   }
 
   @override

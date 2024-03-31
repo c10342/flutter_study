@@ -3,6 +3,7 @@ import 'package:flutter_haokezu/components/base_page_layout.dart';
 import 'package:flutter_haokezu/pages/home/home.dart';
 import 'package:flutter_haokezu/pages/home/info.dart';
 import 'package:flutter_haokezu/pages/home/my.dart';
+import 'package:flutter_haokezu/pages/home/provider.dart';
 import 'package:flutter_haokezu/pages/home/search.dart';
 import 'package:flutter_haokezu/routes.dart';
 
@@ -12,10 +13,6 @@ List<BottomNavigationBarItem> tabItems = [
   const BottomNavigationBarItem(icon: Icon(Icons.info), label: '资讯'),
   const BottomNavigationBarItem(icon: Icon(Icons.account_circle), label: '我的'),
 ];
-
-enum ActiveType { Show, Hide }
-
-typedef UpdateCallback = Function(int activeIndex, ActiveType type);
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -81,40 +78,42 @@ class _HomePageState extends RouteLifeState<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return BasePageLayout(
-      // body: tabViews[selectIndex],
-      // 缓存页面-懒加载，配合 AutomaticKeepAliveClientMixin 一起使用
-      body: PageView(
-        controller: _pageController,
-        children: [
-          HomeView(
-              activeIndex: selectIndex,
-              index: 0,
-              addUpdateCallback: addUpdateCallback,
-              removeUpdateCallback: removeUpdateCallback),
-          SearchView(
-            activeIndex: selectIndex,
-            index: 1,
+    return UpdateProvider(
+        addUpdateCallback: addUpdateCallback,
+        removeUpdateCallback: removeUpdateCallback,
+        child: BasePageLayout(
+          // body: tabViews[selectIndex],
+          // 缓存页面-懒加载，配合 AutomaticKeepAliveClientMixin 一起使用
+          body: PageView(
+            controller: _pageController,
+            children: [
+              HomeView(
+                activeIndex: selectIndex,
+                index: 0,
+              ),
+              SearchView(
+                activeIndex: selectIndex,
+                index: 1,
+              ),
+              InfoView(
+                activeIndex: selectIndex,
+                index: 2,
+              ),
+              const MyView(),
+            ],
+            onPageChanged: (value) {
+              runUpdateCallback(value, ActiveType.Show);
+            },
           ),
-          InfoView(
-            activeIndex: selectIndex,
-            index: 2,
+          // 缓存页面，缺点-一次性加载所有页面
+          // body: IndexedStack(index: selectIndex, children: tabViews),
+          footer: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            items: tabItems,
+            currentIndex: selectIndex,
+            onTap: onTabItemClick,
+            selectedItemColor: Theme.of(context).colorScheme.primary,
           ),
-          const MyView(),
-        ],
-        onPageChanged: (value) {
-          runUpdateCallback(value, ActiveType.Show);
-        },
-      ),
-      // 缓存页面，缺点-一次性加载所有页面
-      // body: IndexedStack(index: selectIndex, children: tabViews),
-      footer: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        items: tabItems,
-        currentIndex: selectIndex,
-        onTap: onTabItemClick,
-        selectedItemColor: Theme.of(context).colorScheme.primary,
-      ),
-    );
+        ));
   }
 }
