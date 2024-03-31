@@ -26,7 +26,6 @@ class _InfoViewState extends State<InfoView>
 
   RefreshController refreshController =
       RefreshController(initialRefresh: false);
-  ScrollController listViewController = ScrollController();
   List<InfoItem> list = [];
 
   int pageIndex = 1;
@@ -40,15 +39,15 @@ class _InfoViewState extends State<InfoView>
   @override
   void dispose() {
     refreshController.dispose();
-    listViewController.dispose();
     super.dispose();
   }
 
   @override
   void update(int activeIndex, ActiveType type) {
     if (activeIndex == widget.index && type == ActiveType.Show) {
-      listViewController.animateTo(0,
-          duration: const Duration(milliseconds: 1), curve: Curves.bounceIn);
+      setState(() {
+        list = [];
+      });
       refreshController.resetNoData();
       pageIndex = 0;
       getList();
@@ -105,7 +104,6 @@ class _InfoViewState extends State<InfoView>
             await getList(showLoading: false);
           },
           refreshController: refreshController,
-          listViewController: listViewController,
           list: list,
           itemBuilder: (BuildContext context, InfoItem data, int index) {
             return Container(
