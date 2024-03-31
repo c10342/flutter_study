@@ -24,7 +24,7 @@ class _InfoViewState extends State<InfoView> {
   }
 
   Future getList() async {
-    await Future.delayed(Duration(milliseconds: 5000));
+    await Future.delayed(Duration(milliseconds: 1000));
     List<InfoItem> data = [];
     for (int i = 0; i < 3; i++) {
       data.add(InfoItem(

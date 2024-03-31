@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_haokezu/components/base_list_view.dart';
 import 'package:flutter_haokezu/components/base_page_layout.dart';
 import 'package:flutter_haokezu/routes.dart';
+import 'package:flutter_haokezu/utils/loading.dart';
 import 'package:flutter_haokezu/utils/toast.dart';
 
 class SettingPage extends StatelessWidget {
@@ -20,7 +21,12 @@ class SettingPage extends StatelessWidget {
                 Navigator.of(context)
                     .pushNamedAndRemoveUntil(Routes.login, (route) => false);
               },
-              child: const Text('退出登录'))
+              child: const Text('退出登录')),
+          ElevatedButton(
+              onPressed: () {
+                BaseLoading.show(context);
+              },
+              child: const Text('弹框'))
         ],
       ),
     );
