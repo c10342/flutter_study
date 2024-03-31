@@ -37,7 +37,9 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return BasePageLayout(
-      body: tabViews[selectIndex],
+      // body: tabViews[selectIndex],
+      // 缓存页面
+      body: IndexedStack(index: selectIndex, children: tabViews),
       footer: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         items: tabItems,
