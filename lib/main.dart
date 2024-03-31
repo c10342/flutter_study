@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: '好租客',
       debugShowCheckedModeBanner: false,
+      navigatorObservers: [routeObserver],
       theme: ThemeData(
         appBarTheme: const AppBarTheme(backgroundColor: Colors.green),
         // 旧版写法

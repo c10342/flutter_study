@@ -3,6 +3,7 @@ import 'package:flutter_haokezu/components/base_list_view.dart';
 import 'package:flutter_haokezu/components/base_page_layout.dart';
 import 'package:flutter_haokezu/components/base_search_bar.dart';
 import 'package:flutter_haokezu/pages/home/components/info_card.dart';
+import 'package:flutter_haokezu/routes.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class InfoView extends StatefulWidget {
@@ -12,13 +13,34 @@ class InfoView extends StatefulWidget {
   State<InfoView> createState() => _InfoViewState();
 }
 
-class _InfoViewState extends State<InfoView>
+class _InfoViewState extends RouteLifeState<InfoView>
     with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
+
   RefreshController refreshController =
       RefreshController(initialRefresh: false);
   List<InfoItem> list = [];
+
+  @override
+  void didPush() {
+    print('_InfoViewState--跳转该页面而显示');
+  }
+
+  @override
+  void didPop() {
+    print('_InfoViewState--当前页面被pop而隐藏');
+  }
+
+  @override
+  void didPopNext() {
+    print('_InfoViewState--上一个页面关闭而显示');
+  }
+
+  @override
+  void didPushNext() {
+    print('_InfoViewState--跳转下一个页面而隐藏');
+  }
 
   @override
   void initState() {

@@ -7,6 +7,8 @@ import 'package:flutter_haokezu/pages/register.dart';
 import 'package:flutter_haokezu/pages/room_detail/index.dart';
 import 'package:flutter_haokezu/pages/setting.dart';
 
+final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
+
 class Routes {
   // 1、定义路由名称
   static String home = '/';
@@ -55,5 +57,20 @@ class Routes {
     router.define(register, handler: _registerHandler);
     router.define(setting, handler: _settingHandler);
     router.notFoundHandler = _notFoundHandler;
+  }
+}
+
+abstract class RouteLifeState<T extends StatefulWidget> extends State<T>
+    with RouteAware {
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    routeObserver.subscribe(this, ModalRoute.of(context) as PageRoute);
+  }
+
+  @override
+  void dispose() {
+    routeObserver.unsubscribe(this);
+    super.dispose();
   }
 }
