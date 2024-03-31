@@ -9,6 +9,8 @@ class MyAdvertisement extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(10),
       child: BaseImage(
+          height: 120,
+          fit: BoxFit.cover,
           src:
               'https://img.zcool.cn/community/0141e55a4b7ff7a801206ed33c952f.png@2o.png'),
     );

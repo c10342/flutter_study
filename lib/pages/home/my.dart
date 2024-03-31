@@ -5,6 +5,7 @@ import 'package:flutter_haokezu/pages/home/components/index_info.dart';
 import 'package:flutter_haokezu/pages/home/components/my_advertisement.dart';
 import 'package:flutter_haokezu/pages/home/components/my_function.dart';
 import 'package:flutter_haokezu/pages/home/components/my_info.dart';
+import 'package:flutter_haokezu/routes.dart';
 
 class MyView extends StatefulWidget {
   const MyView({super.key});
@@ -21,7 +22,7 @@ class _MyViewState extends State<MyView> {
       actions: [
         IconButton(
             onPressed: () {
-              //todo
+              Navigator.pushNamed(context, Routes.setting);
             },
             icon: const Icon(
               Icons.settings,
