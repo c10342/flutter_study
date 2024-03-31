@@ -1,5 +1,6 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_haokezu/routes.dart';
 
 void main() {
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
         ), // 设置AppBar的主题色
       ),
       onGenerateRoute: router.generator,
+      builder: EasyLoading.init(),
     );
   }
 }

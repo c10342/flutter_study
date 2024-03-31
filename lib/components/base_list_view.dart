@@ -10,6 +10,7 @@ class BaseListViewBuilder<T> extends StatelessWidget {
   void Function() onRefresh;
   void Function() onLoading;
   RefreshController refreshController;
+  ScrollController? listViewController;
 
   BaseListViewBuilder(
       {super.key,
@@ -17,7 +18,8 @@ class BaseListViewBuilder<T> extends StatelessWidget {
       required this.itemBuilder,
       required this.onRefresh,
       required this.onLoading,
-      required this.refreshController});
+      required this.refreshController,
+      this.listViewController});
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +59,9 @@ class BaseListViewBuilder<T> extends StatelessWidget {
                 return itemBuilder(context, list[index], index);
               },
               itemCount: list.length,
-              physics: const ClampingScrollPhysics()),
+              physics: const ClampingScrollPhysics(),
+              controller: listViewController,
+            ),
     );
   }
 }

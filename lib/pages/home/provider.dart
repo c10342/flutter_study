@@ -23,8 +23,11 @@ class UpdateProvider extends InheritedWidget {
   }
 
   // 静态方法，允许子树中的任何位置获取UpdateProvider
-  static UpdateProvider? of(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType<UpdateProvider>();
+  static UpdateProvider? of(BuildContext? context) {
+    if (context?.dependOnInheritedWidgetOfExactType != null) {
+      return context!.dependOnInheritedWidgetOfExactType<UpdateProvider>();
+    }
+    return null;
   }
 }
 
@@ -43,11 +46,20 @@ mixin UpdateProviderMixin<T extends StatefulWidget> on State<T> {
   }
 
   @override
-  void dispose() {
+  void deactivate() {
     UpdateProvider? updateProvider = UpdateProvider.of(context);
     if (updateProvider != null) {
       updateProvider.removeUpdateCallback(update);
     }
-    super.dispose();
+    super.deactivate();
   }
+
+  // @override
+  // void dispose() {
+  //   UpdateProvider? updateProvider = UpdateProvider.of(context);
+  //   if (updateProvider != null) {
+  //     updateProvider.removeUpdateCallback(update);
+  //   }
+  //   super.dispose();
+  // }
 }

@@ -7,7 +7,7 @@ import 'package:flutter_haokezu/components/base_page_layout.dart';
 import 'package:flutter_haokezu/components/base_search_bar.dart';
 import 'package:flutter_haokezu/pages/home/components/info_card.dart';
 import 'package:flutter_haokezu/pages/home/provider.dart';
-import 'package:flutter_haokezu/utils/loading.dart';
+import 'package:flutter_haokezu/utils/easy_loading.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class InfoView extends StatefulWidget {
@@ -26,6 +26,7 @@ class _InfoViewState extends State<InfoView>
 
   RefreshController refreshController =
       RefreshController(initialRefresh: false);
+  ScrollController listViewController = ScrollController();
   List<InfoItem> list = [];
 
   int pageIndex = 1;
@@ -33,22 +34,30 @@ class _InfoViewState extends State<InfoView>
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration.zero, () {
-      getList();
-    });
+    getList();
+  }
+
+  @override
+  void dispose() {
+    refreshController.dispose();
+    listViewController.dispose();
+    super.dispose();
   }
 
   @override
   void update(int activeIndex, ActiveType type) {
     if (activeIndex == widget.index && type == ActiveType.Show) {
+      listViewController.animateTo(0,
+          duration: const Duration(milliseconds: 1), curve: Curves.bounceIn);
+      refreshController.resetNoData();
+      pageIndex = 0;
       getList();
     }
   }
 
   Future getList({bool showLoading = true}) async {
-    Function? close;
     if (showLoading == true) {
-      close = BaseLoading.show(context);
+      EasyUtils.loading();
     }
     await Future.delayed(const Duration(milliseconds: 1000));
     List<InfoItem> data = [];
@@ -76,9 +85,7 @@ class _InfoViewState extends State<InfoView>
         list.addAll(data);
       }
     });
-    if (close != null) {
-      close();
-    }
+    EasyUtils.close();
   }
 
   @override
@@ -98,6 +105,7 @@ class _InfoViewState extends State<InfoView>
             await getList(showLoading: false);
           },
           refreshController: refreshController,
+          listViewController: listViewController,
           list: list,
           itemBuilder: (BuildContext context, InfoItem data, int index) {
             return Container(

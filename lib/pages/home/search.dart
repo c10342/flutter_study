@@ -26,6 +26,12 @@ class _SearchViewState extends State<SearchView>
   bool get wantKeepAlive => true;
 
   @override
+  void dispose() {
+    refreshController.dispose();
+    super.dispose();
+  }
+
+  @override
   void initState() {
     super.initState();
     for (int i = 0; i < 10; i++) {

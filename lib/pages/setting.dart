@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_haokezu/components/base_list_view.dart';
 import 'package:flutter_haokezu/components/base_page_layout.dart';
 import 'package:flutter_haokezu/routes.dart';
-import 'package:flutter_haokezu/utils/loading.dart';
-import 'package:flutter_haokezu/utils/toast.dart';
+import 'package:flutter_haokezu/utils/easy_loading.dart';
 
 class SettingPage extends StatelessWidget {
   const SettingPage({super.key});
@@ -16,17 +15,13 @@ class SettingPage extends StatelessWidget {
         children: [
           ElevatedButton(
               onPressed: () {
-                BaseToast.show('退出登录');
+                // BaseToast.show('退出登录');
+                EasyUtils.toast('退出登录');
                 // 导航到新的路由并清空整个栈
                 Navigator.of(context)
                     .pushNamedAndRemoveUntil(Routes.login, (route) => false);
               },
               child: const Text('退出登录')),
-          ElevatedButton(
-              onPressed: () {
-                BaseLoading.show(context);
-              },
-              child: const Text('弹框'))
         ],
       ),
     );
