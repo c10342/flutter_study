@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_haokezu/components/base_page_layout.dart';
+import 'package:flutter_haokezu/pages/home/controller.dart';
 import 'package:flutter_haokezu/pages/home/home.dart';
 import 'package:flutter_haokezu/pages/home/info.dart';
 import 'package:flutter_haokezu/pages/home/my.dart';
@@ -24,7 +25,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends RouteLifeState<HomePage> {
   int selectIndex = 0;
   late PageController _pageController;
-  List<UpdateCallback> updateCallback = [];
+  UpdateController updateController = UpdateController();
 
   @override
   void didPush() {
@@ -39,19 +40,25 @@ class _HomePageState extends RouteLifeState<HomePage> {
   @override
   void didPopNext() {
     print('上一个页面关闭而显示');
-    runUpdateCallback(selectIndex, ActiveType.Show);
+    updateController.update(selectIndex, ActiveType.Show);
   }
 
   @override
   void didPushNext() {
     print('跳转下一个页面而隐藏');
-    runUpdateCallback(selectIndex, ActiveType.Hide);
+    updateController.update(selectIndex, ActiveType.Hide);
   }
 
   @override
   void initState() {
     _pageController = PageController(initialPage: selectIndex);
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    updateController.dispose();
+    super.dispose();
   }
 
   void onTabItemClick(int index) {
@@ -61,59 +68,43 @@ class _HomePageState extends RouteLifeState<HomePage> {
     _pageController.jumpToPage(index);
   }
 
-  void runUpdateCallback(int activeIndex, ActiveType type) {
-    List<UpdateCallback> cbs = [...updateCallback];
-    for (var cb in cbs) {
-      cb(activeIndex, type);
-    }
-  }
-
-  void addUpdateCallback(UpdateCallback cb) {
-    updateCallback.add(cb);
-  }
-
-  void removeUpdateCallback(UpdateCallback cb) {
-    updateCallback.remove(cb);
-  }
-
   @override
   Widget build(BuildContext context) {
-    return UpdateProvider(
-        addUpdateCallback: addUpdateCallback,
-        removeUpdateCallback: removeUpdateCallback,
-        child: BasePageLayout(
-          // body: tabViews[selectIndex],
-          // 缓存页面-懒加载，配合 AutomaticKeepAliveClientMixin 一起使用
-          body: PageView(
-            controller: _pageController,
-            children: [
-              HomeView(
-                activeIndex: selectIndex,
-                index: 0,
-              ),
-              SearchView(
-                activeIndex: selectIndex,
-                index: 1,
-              ),
-              InfoView(
-                activeIndex: selectIndex,
-                index: 2,
-              ),
-              const MyView(),
-            ],
-            onPageChanged: (value) {
-              runUpdateCallback(value, ActiveType.Show);
-            },
+    return BasePageLayout(
+      // body: tabViews[selectIndex],
+      // 缓存页面-懒加载，配合 AutomaticKeepAliveClientMixin 一起使用
+      body: PageView(
+        controller: _pageController,
+        children: [
+          HomeView(
+            activeIndex: selectIndex,
+            index: 0,
+            updateController: updateController,
           ),
-          // 缓存页面，缺点-一次性加载所有页面
-          // body: IndexedStack(index: selectIndex, children: tabViews),
-          footer: BottomNavigationBar(
-            type: BottomNavigationBarType.fixed,
-            items: tabItems,
-            currentIndex: selectIndex,
-            onTap: onTabItemClick,
-            selectedItemColor: Theme.of(context).colorScheme.primary,
+          SearchView(
+            activeIndex: selectIndex,
+            index: 1,
           ),
-        ));
+          InfoView(
+            activeIndex: selectIndex,
+            index: 2,
+            updateController: updateController,
+          ),
+          const MyView(),
+        ],
+        onPageChanged: (value) {
+          updateController.update(value, ActiveType.Show);
+        },
+      ),
+      // 缓存页面，缺点-一次性加载所有页面
+      // body: IndexedStack(index: selectIndex, children: tabViews),
+      footer: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        items: tabItems,
+        currentIndex: selectIndex,
+        onTap: onTabItemClick,
+        selectedItemColor: Theme.of(context).colorScheme.primary,
+      ),
+    );
   }
 }

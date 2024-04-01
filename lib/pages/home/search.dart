@@ -75,11 +75,11 @@ class _SearchViewState extends State<SearchView>
       ),
       body: BaseListViewBuilder(
           onRefresh: () async {
-            await Future.delayed(Duration(milliseconds: 1000));
+            await Future.delayed(const Duration(milliseconds: 1000));
             refreshController.refreshCompleted();
           },
           onLoading: () async {
-            await Future.delayed(Duration(milliseconds: 1000));
+            await Future.delayed(const Duration(milliseconds: 1000));
             refreshController.loadComplete();
           },
           refreshController: refreshController,

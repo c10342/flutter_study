@@ -8,34 +8,26 @@ import 'package:flutter_haokezu/components/base_swiper.dart';
 import 'package:flutter_haokezu/pages/home/components/index_info.dart';
 import 'package:flutter_haokezu/pages/home/components/index_navigator.dart';
 import 'package:flutter_haokezu/pages/home/components/index_recommend.dart';
-import 'package:flutter_haokezu/pages/home/provider.dart';
+import 'package:flutter_haokezu/pages/home/controller.dart';
 
 class HomeView extends StatefulWidget {
   int activeIndex;
   int index;
-  HomeView({
-    super.key,
-    required this.activeIndex,
-    required this.index,
-  });
+  UpdateController? updateController;
+  HomeView(
+      {super.key,
+      required this.activeIndex,
+      required this.index,
+      this.updateController});
 
   @override
   State<HomeView> createState() => _HomeViewState();
 }
 
 class _HomeViewState extends State<HomeView>
-    with AutomaticKeepAliveClientMixin, UpdateProviderMixin {
+    with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
-
-  @override
-  void update(int activeIndex, ActiveType type) {
-    if (activeIndex == widget.index && type == ActiveType.Show) {
-      print('home-显示');
-    } else {
-      print('home-隐藏');
-    }
-  }
 
   @override
   Widget build(BuildContext context) {

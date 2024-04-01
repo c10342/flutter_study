@@ -6,6 +6,7 @@ import 'package:flutter_haokezu/components/base_list_view.dart';
 import 'package:flutter_haokezu/components/base_page_layout.dart';
 import 'package:flutter_haokezu/components/base_search_bar.dart';
 import 'package:flutter_haokezu/pages/home/components/info_card.dart';
+import 'package:flutter_haokezu/pages/home/controller.dart';
 import 'package:flutter_haokezu/pages/home/provider.dart';
 import 'package:flutter_haokezu/utils/easy_loading.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -13,14 +14,19 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 class InfoView extends StatefulWidget {
   int activeIndex;
   int index;
-  InfoView({super.key, required this.activeIndex, required this.index});
+  UpdateController? updateController;
+  InfoView(
+      {super.key,
+      required this.activeIndex,
+      required this.index,
+      this.updateController});
 
   @override
   State<InfoView> createState() => _InfoViewState();
 }
 
 class _InfoViewState extends State<InfoView>
-    with AutomaticKeepAliveClientMixin, UpdateProviderMixin {
+    with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
 
@@ -31,18 +37,19 @@ class _InfoViewState extends State<InfoView>
   int pageIndex = 1;
 
   @override
-  void initState() {
-    super.initState();
-    getList();
-  }
-
-  @override
   void dispose() {
     refreshController.dispose();
+    widget.updateController?.remove(update);
     super.dispose();
   }
 
   @override
+  void initState() {
+    super.initState();
+    widget.updateController?.add(update);
+    getList(showLoading: true);
+  }
+
   void update(int activeIndex, ActiveType type) {
     if (activeIndex == widget.index && type == ActiveType.Show) {
       setState(() {
@@ -50,7 +57,7 @@ class _InfoViewState extends State<InfoView>
       });
       refreshController.resetNoData();
       pageIndex = 0;
-      getList();
+      getList(showLoading: true);
     }
   }
 
@@ -58,7 +65,7 @@ class _InfoViewState extends State<InfoView>
     if (showLoading == true) {
       EasyUtils.loading();
     }
-    await Future.delayed(const Duration(milliseconds: 1000));
+    await Future.delayed(const Duration(milliseconds: 5000));
     List<InfoItem> data = [];
     var random = Random();
     for (int i = 0; i < 10; i++) {
@@ -91,26 +98,25 @@ class _InfoViewState extends State<InfoView>
   Widget build(BuildContext context) {
     super.build(context);
     return BasePageLayout(
-      pageBgColor: Colors.grey[200],
-      header: const BaseSearchBar(),
-      body: BaseListViewBuilder(
-          onRefresh: () async {
-            refreshController.resetNoData();
-            pageIndex = 0;
-            await getList(showLoading: false);
-          },
-          onLoading: () async {
-            pageIndex += 1;
-            await getList(showLoading: false);
-          },
-          refreshController: refreshController,
-          list: list,
-          itemBuilder: (BuildContext context, InfoItem data, int index) {
-            return Container(
-              margin: const EdgeInsets.only(bottom: 10),
-              child: InfoCard(item: data),
-            );
-          }),
-    );
+        pageBgColor: Colors.grey[200],
+        header: const BaseSearchBar(),
+        body: BaseListViewBuilder(
+            onRefresh: () async {
+              refreshController.resetNoData();
+              pageIndex = 0;
+              await getList(showLoading: false);
+            },
+            onLoading: () async {
+              pageIndex += 1;
+              await getList(showLoading: false);
+            },
+            refreshController: refreshController,
+            list: list,
+            itemBuilder: (BuildContext context, InfoItem data, int index) {
+              return Container(
+                margin: const EdgeInsets.only(bottom: 10),
+                child: InfoCard(item: data),
+              );
+            }));
   }
 }

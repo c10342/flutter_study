@@ -1,5 +1,7 @@
 import 'package:flutter/widgets.dart';
 
+// App生命周期
+
 mixin AppLifecycleMixin<T extends StatefulWidget> on State<T> {
   late final AppLifecycleListener listener;
 
