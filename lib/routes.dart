@@ -4,7 +4,9 @@ import 'package:flutter_haokezu/pages/home/index.dart';
 import 'package:flutter_haokezu/pages/login.dart';
 import 'package:flutter_haokezu/pages/not_found.dart';
 import 'package:flutter_haokezu/pages/register.dart';
+import 'package:flutter_haokezu/pages/room_add/index.dart';
 import 'package:flutter_haokezu/pages/room_detail/index.dart';
+import 'package:flutter_haokezu/pages/room_manage/index.dart';
 import 'package:flutter_haokezu/pages/setting.dart';
 
 final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
@@ -16,6 +18,8 @@ class Routes {
   static String roomDetail = '/roomDetail/:roomId';
   static String register = '/register';
   static String setting = '/setting';
+  static String roomManage = '/roomManage';
+  static String roomAdd = '/roomAdd';
 
   // 2、定义处理函数
   static final Handler _homeHandler = Handler(
@@ -49,6 +53,17 @@ class Routes {
       handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
     return const SettingPage();
   });
+
+  static final Handler _roomManageHandler = Handler(
+      handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
+    return const RoomManagePage();
+  });
+
+  static final Handler _roomAddHandler = Handler(
+      handlerFunc: (BuildContext? context, Map<String, dynamic> params) {
+    return const RoomAddPage();
+  });
+
   // 3、初始化路由
   static void configureRoutes(FluroRouter router) {
     router.define(home, handler: _homeHandler);
@@ -56,6 +71,8 @@ class Routes {
     router.define(roomDetail, handler: _roomDetailHandler);
     router.define(register, handler: _registerHandler);
     router.define(setting, handler: _settingHandler);
+    router.define(roomManage, handler: _roomManageHandler);
+    router.define(roomAdd, handler: _roomAddHandler);
     router.notFoundHandler = _notFoundHandler;
   }
 }
