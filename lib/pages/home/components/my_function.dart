@@ -6,7 +6,7 @@ import 'package:flutter_haokezu/routes.dart';
 class FunctionItem {
   final String imageUrl;
   final String title;
-  final Function? onTap;
+  final Function(BuildContext context)? onTap;
   FunctionItem(
       {required this.imageUrl, required this.title, required this.onTap});
 }
@@ -15,7 +15,7 @@ final List<FunctionItem> list = [
   FunctionItem(
       imageUrl: 'static/images/home_profile_record.png',
       title: "看房记录",
-      onTap: () {}),
+      onTap: null),
   FunctionItem(
       imageUrl: 'static/images/home_profile_order.png',
       title: '我的订单',
