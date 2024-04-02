@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_haokezu/components/base_form/base_city_select.dart';
 import 'package:flutter_haokezu/components/base_form/base_form.dart';
 import 'package:flutter_haokezu/components/base_form/base_form_item.dart';
-import 'package:flutter_haokezu/components/base_input.dart';
+import 'package:flutter_haokezu/components/base_form/base_input.dart';
 import 'package:flutter_haokezu/components/base_list_view.dart';
 import 'package:flutter_haokezu/components/base_page_layout.dart';
 import 'package:flutter_haokezu/pages/room_add/group_title.dart';
@@ -24,11 +25,18 @@ class _RoomAddPageState extends State<RoomAddPage> {
               GroupTitle(
                 title: '房源信息',
                 children: [
+                  const BaseFormItem(
+                    label: '小区',
+                    content: BaseCitySelect(
+                      placeholder: '请选择小区',
+                    ),
+                  ),
                   BaseFormItem(
                     label: '租金',
                     content: BaseInput(
                       border: InputBorder.none,
                       placeholder: '请输入租金信息',
+                      autofocus: false,
                     ),
                     suffixText: '元/月',
                   ),
@@ -37,6 +45,7 @@ class _RoomAddPageState extends State<RoomAddPage> {
                     content: BaseInput(
                       border: InputBorder.none,
                       placeholder: '请输入房屋大小',
+                      autofocus: false,
                     ),
                     suffixText: '平方米',
                   )

@@ -5,6 +5,7 @@ class BaseInput extends StatelessWidget {
   String? label;
   String? placeholder;
   bool? password;
+  bool? autofocus;
   InputBorder? border;
   Function(String value)? onChanged;
   BaseInput(
@@ -13,7 +14,8 @@ class BaseInput extends StatelessWidget {
       this.label,
       this.placeholder,
       this.border,
-      this.onChanged});
+      this.onChanged,
+      this.autofocus});
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +25,7 @@ class BaseInput extends StatelessWidget {
       decoration: InputDecoration(
           labelText: label, hintText: placeholder, border: border),
       onChanged: onChanged,
+      autofocus: autofocus ?? false,
     );
   }
 }

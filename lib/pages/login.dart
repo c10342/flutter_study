@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_haokezu/components/base_input.dart';
+import 'package:flutter_haokezu/components/base_form/base_input.dart';
 import 'package:flutter_haokezu/components/base_list_view.dart';
 import 'package:flutter_haokezu/components/base_page_layout.dart';
 import 'package:flutter_haokezu/routes.dart';
