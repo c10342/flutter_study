@@ -3,6 +3,8 @@ import 'package:flutter_haokezu/components/base_form/base_city_select.dart';
 import 'package:flutter_haokezu/components/base_form/base_form.dart';
 import 'package:flutter_haokezu/components/base_form/base_form_item.dart';
 import 'package:flutter_haokezu/components/base_form/base_input.dart';
+import 'package:flutter_haokezu/components/base_form/base_option.dart';
+import 'package:flutter_haokezu/components/base_form/base_radio.dart';
 import 'package:flutter_haokezu/components/base_list_view.dart';
 import 'package:flutter_haokezu/components/base_page_layout.dart';
 import 'package:flutter_haokezu/pages/room_add/group_title.dart';
@@ -21,7 +23,7 @@ class _RoomAddPageState extends State<RoomAddPage> {
         title: '发布房源',
         body: BaseListView(
           children: [
-            BaseForm(labelWidth: 60, children: [
+            BaseForm(labelWidth: 100, children: [
               GroupTitle(
                 title: '房源信息',
                 children: [
@@ -48,7 +50,37 @@ class _RoomAddPageState extends State<RoomAddPage> {
                       autofocus: false,
                     ),
                     suffixText: '平方米',
-                  )
+                  ),
+                  BaseFormItem(
+                    label: '租赁方式',
+                    content: BaseRadio(
+                      options: [
+                        BaseOption(
+                          label: '合租',
+                          value: 0,
+                        ),
+                        BaseOption(
+                          label: '整租',
+                          value: 1,
+                        ),
+                      ],
+                    ),
+                  ),
+                  BaseFormItem(
+                    label: '装修',
+                    content: BaseRadio(
+                      options: [
+                        BaseOption(
+                          label: '精装',
+                          value: 0,
+                        ),
+                        BaseOption(
+                          label: '简装',
+                          value: 1,
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
               GroupTitle(
