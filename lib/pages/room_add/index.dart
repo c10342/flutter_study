@@ -27,10 +27,11 @@ class _RoomAddPageState extends State<RoomAddPage> {
               GroupTitle(
                 title: '房源信息',
                 children: [
-                  const BaseFormItem(
+                  BaseFormItem(
                     label: '小区',
                     content: BaseCitySelect(
                       placeholder: '请选择小区',
+                      // disabled: true,
                     ),
                   ),
                   BaseFormItem(
@@ -39,6 +40,7 @@ class _RoomAddPageState extends State<RoomAddPage> {
                       border: InputBorder.none,
                       placeholder: '请输入租金信息',
                       autofocus: false,
+                      disabled: true,
                     ),
                     suffixText: '元/月',
                   ),
@@ -55,10 +57,7 @@ class _RoomAddPageState extends State<RoomAddPage> {
                     label: '租赁方式',
                     content: BaseRadio(
                       options: [
-                        BaseOption(
-                          label: '合租',
-                          value: 0,
-                        ),
+                        BaseOption(label: '合租', value: 0, disabled: true),
                         BaseOption(
                           label: '整租',
                           value: 1,
@@ -69,6 +68,7 @@ class _RoomAddPageState extends State<RoomAddPage> {
                   BaseFormItem(
                     label: '装修',
                     content: BaseRadio(
+                      disabled: true,
                       options: [
                         BaseOption(
                           label: '精装',

@@ -9,6 +9,7 @@ class BaseInput extends StatefulWidget {
   InputBorder? border;
   String? value;
   void Function(String value)? onChanged;
+  bool? disabled;
   BaseInput(
       {super.key,
       this.password,
@@ -17,7 +18,8 @@ class BaseInput extends StatefulWidget {
       this.border,
       this.onChanged,
       this.autofocus,
-      this.value});
+      this.value,
+      this.disabled});
 
   @override
   State<BaseInput> createState() => _BaseInputState();
@@ -41,6 +43,7 @@ class _BaseInputState extends State<BaseInput> {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      enabled: widget.disabled == true ? false : true,
       controller: _controller,
       // 密码输入
       obscureText: widget.password ?? false,

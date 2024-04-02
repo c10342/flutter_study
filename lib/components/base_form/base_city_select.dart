@@ -1,14 +1,21 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 
 class BaseCitySelect extends StatelessWidget {
   final String? placeholder;
+  bool? disabled;
 
-  const BaseCitySelect({super.key, this.placeholder});
+  BaseCitySelect({super.key, this.placeholder, this.disabled});
 
   @override
   Widget build(BuildContext context) {
+    bool isDisabled = disabled ?? false;
     return GestureDetector(
       onTap: () {
+        if (isDisabled) {
+          return;
+        }
         Navigator.of(context).pushNamed('search');
       },
       child: SizedBox(
@@ -20,11 +27,15 @@ class BaseCitySelect extends StatelessWidget {
                 child: Text(
               placeholder ?? '',
               style: TextStyle(
-                  color:
-                      Theme.of(context).inputDecorationTheme.hintStyle?.color,
+                  color: isDisabled
+                      ? Colors.grey
+                      : Theme.of(context).inputDecorationTheme.hintStyle?.color,
                   fontSize: 16),
             )),
-            const Icon(Icons.keyboard_arrow_right)
+            Icon(
+              Icons.keyboard_arrow_right,
+              color: isDisabled ? Colors.grey : null,
+            )
           ],
         ),
       ),
