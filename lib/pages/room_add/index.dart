@@ -5,6 +5,7 @@ import 'package:flutter_haokezu/components/base_form/base_form_item.dart';
 import 'package:flutter_haokezu/components/base_form/base_input.dart';
 import 'package:flutter_haokezu/components/base_form/base_option.dart';
 import 'package:flutter_haokezu/components/base_form/base_radio.dart';
+import 'package:flutter_haokezu/components/base_form/base_select.dart';
 import 'package:flutter_haokezu/components/base_list_view.dart';
 import 'package:flutter_haokezu/components/base_page_layout.dart';
 import 'package:flutter_haokezu/pages/room_add/group_title.dart';
@@ -76,6 +77,55 @@ class _RoomAddPageState extends State<RoomAddPage> {
                         ),
                         BaseOption(
                           label: '简装',
+                          value: 1,
+                        ),
+                      ],
+                    ),
+                  ),
+                  BaseFormItem(
+                    label: '户型',
+                    content: BaseSelect(
+                      placeholder: '请选择',
+                      options: [
+                        BaseOption(
+                          label: '一室',
+                          value: 0,
+                        ),
+                        BaseOption(
+                          label: '二室',
+                          value: 1,
+                        ),
+                      ],
+                    ),
+                  ),
+                  BaseFormItem(
+                    label: '楼层',
+                    content: BaseSelect(
+                      placeholder: '请选择',
+                      options: [
+                        BaseOption(
+                          label: '高楼层',
+                          value: 0,
+                        ),
+                        BaseOption(
+                          label: '低楼层',
+                          value: 1,
+                        ),
+                      ],
+                    ),
+                  ),
+                  BaseFormItem(
+                    label: '朝向',
+                    content: BaseSelect(
+                      placeholder: '请选择',
+                      disabled: true,
+                      options: [
+                        BaseOption(
+                          label: '东',
+                          value: 0,
+                        ),
+                        BaseOption(
+                          label: '西',
                           value: 1,
                         ),
                       ],

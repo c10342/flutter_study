@@ -1,13 +1,20 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:flutter_haokezu/components/base_form/base_option.dart';
 
-class BaseCitySelect extends StatelessWidget {
+class BaseSelect extends StatelessWidget {
   final String? placeholder;
   bool? disabled;
   dynamic value;
+  List<BaseOption> options;
 
-  BaseCitySelect({super.key, this.placeholder, this.disabled, this.value});
+  BaseSelect(
+      {super.key,
+      this.placeholder,
+      this.disabled,
+      this.value,
+      required this.options});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +24,6 @@ class BaseCitySelect extends StatelessWidget {
         if (isDisabled) {
           return;
         }
-        Navigator.of(context).pushNamed('search');
       },
       child: SizedBox(
         height: 50,
