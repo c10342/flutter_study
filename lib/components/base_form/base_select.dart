@@ -1,13 +1,13 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'package:flutter_haokezu/components/base_form/base_option.dart';
+import 'package:flutter_haokezu/model/select_option.dart';
 
 class BaseSelect extends StatelessWidget {
   final String? placeholder;
   bool? disabled;
   dynamic value;
-  List<BaseOption> options;
+  List<SelectOption> options;
 
   BaseSelect(
       {super.key,
@@ -20,6 +20,7 @@ class BaseSelect extends StatelessWidget {
   Widget build(BuildContext context) {
     bool isDisabled = disabled ?? false;
     return GestureDetector(
+      behavior: HitTestBehavior.translucent,
       onTap: () {
         if (isDisabled) {
           return;

@@ -1,10 +1,10 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'package:flutter_haokezu/components/base_form/base_option.dart';
+import 'package:flutter_haokezu/model/select_option.dart';
 
 class BaseRadio extends StatefulWidget {
-  final List<BaseOption> options;
+  final List<SelectOption> options;
   dynamic value;
   bool? disabled;
   final void Function(dynamic value)? onChanged;
@@ -24,7 +24,7 @@ class _BaseRadioState extends State<BaseRadio> {
   dynamic _value;
 
   void _onChanged(dynamic value) {
-    BaseOption option =
+    SelectOption option =
         widget.options.singleWhere((element) => element.value == value);
     if (option.disabled == true || widget.disabled == true) {
       return;
@@ -49,6 +49,7 @@ class _BaseRadioState extends State<BaseRadio> {
       children: widget.options.map((item) {
         bool isDisabled = (item.disabled ?? widget.disabled) ?? false;
         return GestureDetector(
+          behavior: HitTestBehavior.translucent,
           onTap: () {
             _onChanged(item.value);
           },

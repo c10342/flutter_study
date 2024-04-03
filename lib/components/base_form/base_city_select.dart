@@ -13,33 +13,37 @@ class BaseCitySelect extends StatelessWidget {
   Widget build(BuildContext context) {
     bool isDisabled = disabled ?? false;
     return GestureDetector(
-      onTap: () {
-        if (isDisabled) {
-          return;
-        }
-        Navigator.of(context).pushNamed('search');
-      },
-      child: SizedBox(
-        height: 50,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Expanded(
-                child: Text(
-              placeholder ?? '',
-              style: TextStyle(
-                  color: isDisabled
-                      ? Colors.grey
-                      : Theme.of(context).inputDecorationTheme.hintStyle?.color,
-                  fontSize: 16),
-            )),
-            Icon(
-              Icons.keyboard_arrow_right,
-              color: isDisabled ? Colors.grey : null,
-            )
-          ],
-        ),
-      ),
-    );
+        // 点击空白触发点击事件
+        behavior: HitTestBehavior.translucent,
+        onTap: () {
+          if (isDisabled) {
+            return;
+          }
+          Navigator.of(context).pushNamed('search');
+        },
+        child: SizedBox(
+          height: 50,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                  child: Text(
+                placeholder ?? '',
+                style: TextStyle(
+                    color: isDisabled
+                        ? Colors.grey
+                        : Theme.of(context)
+                            .inputDecorationTheme
+                            .hintStyle
+                            ?.color,
+                    fontSize: 16),
+              )),
+              Icon(
+                Icons.keyboard_arrow_right,
+                color: isDisabled ? Colors.grey : null,
+              )
+            ],
+          ),
+        ));
   }
 }
