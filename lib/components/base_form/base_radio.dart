@@ -24,6 +24,14 @@ class BaseRadio extends StatefulWidget {
 class _BaseRadioState extends State<BaseRadio> {
   dynamic _value;
 
+  @override
+  void initState() {
+    super.initState();
+    if (widget.value != null) {
+      _value = widget.value;
+    }
+  }
+
   void _onChanged(dynamic value) {
     SelectOption? option = CommonUtils.findItemByList(
         widget.options, (element) => element.value == value);

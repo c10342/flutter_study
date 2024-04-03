@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_haokezu/components/base_form/base_city_select.dart';
 import 'package:flutter_haokezu/components/base_form/base_form.dart';
 import 'package:flutter_haokezu/components/base_form/base_form_item.dart';
+import 'package:flutter_haokezu/components/base_form/base_image_picker.dart';
 import 'package:flutter_haokezu/components/base_form/base_input.dart';
 import 'package:flutter_haokezu/components/base_form/base_radio.dart';
 import 'package:flutter_haokezu/components/base_form/base_select.dart';
@@ -135,7 +136,8 @@ class _RoomAddPageState extends State<RoomAddPage> {
                 ],
               ),
               GroupTitle(
-                title: '房屋头像',
+                title: '房屋图像',
+                children: [BaseImagePicker()],
               ),
               GroupTitle(
                 title: '房屋标题',

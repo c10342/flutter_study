@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 RegExp netWorkUrl = RegExp('^http');
 RegExp localUrl = RegExp('^static');
+RegExp fileUrl = RegExp('^/');
 
 // ignore: must_be_immutable
 class BaseImage extends StatelessWidget {
@@ -26,6 +29,13 @@ class BaseImage extends StatelessWidget {
     } else if (localUrl.hasMatch(src)) {
       return Image.asset(
         src,
+        width: width,
+        fit: fit,
+        height: height,
+      );
+    } else if (fileUrl.hasMatch(src)) {
+      return Image.file(
+        File(src),
         width: width,
         fit: fit,
         height: height,

@@ -31,6 +31,14 @@ class _BaseSelectState extends State<BaseSelect> {
 
   dynamic get _disabled => widget.disabled ?? false;
 
+  @override
+  void initState() {
+    super.initState();
+    if (widget.value != null) {
+      _value = widget.value;
+    }
+  }
+
   Widget buildLabel() {
     if (_realValue == null) {
       // 值不存在，显示占位符
