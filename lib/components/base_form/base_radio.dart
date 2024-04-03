@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_haokezu/model/select_option.dart';
+import 'package:flutter_haokezu/utils/helper.dart';
 
 class BaseRadio extends StatefulWidget {
   final List<SelectOption> options;
@@ -24,9 +25,9 @@ class _BaseRadioState extends State<BaseRadio> {
   dynamic _value;
 
   void _onChanged(dynamic value) {
-    SelectOption option =
-        widget.options.singleWhere((element) => element.value == value);
-    if (option.disabled == true || widget.disabled == true) {
+    SelectOption? option = CommonUtils.findItemByList(
+        widget.options, (element) => element.value == value);
+    if (option?.disabled == true || widget.disabled == true) {
       return;
     }
     dynamic realValue = widget.value ?? _value;

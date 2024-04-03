@@ -93,6 +93,7 @@ class _RoomAddPageState extends State<RoomAddPage> {
                         ),
                         SelectOption(
                           label: '二室',
+                          disabled: true,
                           value: 1,
                         ),
                       ],
