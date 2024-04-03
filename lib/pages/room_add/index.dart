@@ -3,11 +3,11 @@ import 'package:flutter_haokezu/components/base_form/base_city_select.dart';
 import 'package:flutter_haokezu/components/base_form/base_form.dart';
 import 'package:flutter_haokezu/components/base_form/base_form_item.dart';
 import 'package:flutter_haokezu/components/base_form/base_input.dart';
-import 'package:flutter_haokezu/components/base_form/base_option.dart';
 import 'package:flutter_haokezu/components/base_form/base_radio.dart';
 import 'package:flutter_haokezu/components/base_form/base_select.dart';
 import 'package:flutter_haokezu/components/base_list_view.dart';
 import 'package:flutter_haokezu/components/base_page_layout.dart';
+import 'package:flutter_haokezu/model/select_option.dart';
 import 'package:flutter_haokezu/pages/room_add/group_title.dart';
 
 class RoomAddPage extends StatefulWidget {
@@ -58,8 +58,8 @@ class _RoomAddPageState extends State<RoomAddPage> {
                     label: '租赁方式',
                     content: BaseRadio(
                       options: [
-                        BaseOption(label: '合租', value: 0, disabled: true),
-                        BaseOption(
+                        SelectOption(label: '合租', value: 0, disabled: true),
+                        SelectOption(
                           label: '整租',
                           value: 1,
                         ),
@@ -71,11 +71,11 @@ class _RoomAddPageState extends State<RoomAddPage> {
                     content: BaseRadio(
                       disabled: true,
                       options: [
-                        BaseOption(
+                        SelectOption(
                           label: '精装',
                           value: 0,
                         ),
-                        BaseOption(
+                        SelectOption(
                           label: '简装',
                           value: 1,
                         ),
@@ -87,11 +87,11 @@ class _RoomAddPageState extends State<RoomAddPage> {
                     content: BaseSelect(
                       placeholder: '请选择',
                       options: [
-                        BaseOption(
+                        SelectOption(
                           label: '一室',
                           value: 0,
                         ),
-                        BaseOption(
+                        SelectOption(
                           label: '二室',
                           value: 1,
                         ),
@@ -103,11 +103,11 @@ class _RoomAddPageState extends State<RoomAddPage> {
                     content: BaseSelect(
                       placeholder: '请选择',
                       options: [
-                        BaseOption(
+                        SelectOption(
                           label: '高楼层',
                           value: 0,
                         ),
-                        BaseOption(
+                        SelectOption(
                           label: '低楼层',
                           value: 1,
                         ),
@@ -120,11 +120,11 @@ class _RoomAddPageState extends State<RoomAddPage> {
                       placeholder: '请选择',
                       disabled: true,
                       options: [
-                        BaseOption(
+                        SelectOption(
                           label: '东',
                           value: 0,
                         ),
-                        BaseOption(
+                        SelectOption(
                           label: '西',
                           value: 1,
                         ),
