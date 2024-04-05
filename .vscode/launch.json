@@ -1,0 +1,16 @@
+{
+  "configurations": [
+    {
+      "name": "Flutter (dev)",
+      "request": "launch",
+      "type": "dart",
+      "toolArgs": ["--dart-define-from-file=env/dev.json"]
+    },
+    {
+      "name": "Flutter (uat)",
+      "request": "launch",
+      "type": "dart",
+      "toolArgs": ["--dart-define-from-file=env/uat.json"]
+    }
+  ]
+}
