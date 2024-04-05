@@ -2,10 +2,10 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_haokezu/model/select_option.dart';
+import 'package:flutter_haokezu/model/base_select_option.dart';
 
-class SelectList extends StatefulWidget {
-  List<SelectOption> options;
+class SelectList<T extends BaseSelectOption> extends StatefulWidget {
+  List<T> options;
   Function()? onCancel;
   Function(dynamic value)? onConfirm;
   dynamic value;
@@ -17,10 +17,11 @@ class SelectList extends StatefulWidget {
       this.value});
 
   @override
-  State<SelectList> createState() => _SelectListState();
+  State<SelectList> createState() => _SelectListState<T>();
 }
 
-class _SelectListState extends State<SelectList> {
+class _SelectListState<T extends BaseSelectOption>
+    extends State<SelectList<T>> {
   late FixedExtentScrollController _controller;
   int _index = 0;
 
@@ -63,7 +64,7 @@ class _SelectListState extends State<SelectList> {
                   ? null
                   : () {
                       if (widget.onConfirm != null) {
-                        SelectOption item = widget.options[_index];
+                        T item = widget.options[_index];
                         widget.onConfirm!(item.value);
                       }
                     },

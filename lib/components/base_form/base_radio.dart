@@ -1,11 +1,11 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'package:flutter_haokezu/model/select_option.dart';
+import 'package:flutter_haokezu/model/base_select_option.dart';
 import 'package:flutter_haokezu/utils/helper.dart';
 
-class BaseRadio extends StatefulWidget {
-  final List<SelectOption> options;
+class BaseRadio<T extends BaseSelectOption> extends StatefulWidget {
+  final List<T> options;
   dynamic value;
   bool? disabled;
   final void Function(dynamic value)? onChanged;
@@ -18,11 +18,13 @@ class BaseRadio extends StatefulWidget {
       this.disabled});
 
   @override
-  State<BaseRadio> createState() => _BaseRadioState();
+  State<BaseRadio> createState() => _BaseRadioState<T>();
 }
 
-class _BaseRadioState extends State<BaseRadio> {
+class _BaseRadioState<T extends BaseSelectOption> extends State<BaseRadio<T>> {
   dynamic _value;
+
+  dynamic get realValue => widget.value ?? _value;
 
   @override
   void initState() {
@@ -33,12 +35,11 @@ class _BaseRadioState extends State<BaseRadio> {
   }
 
   void _onChanged(dynamic value) {
-    SelectOption? option = CommonUtils.findItemByList(
+    T? option = CommonUtils.findItemByList(
         widget.options, (element) => element.value == value);
     if (option?.disabled == true || widget.disabled == true) {
       return;
     }
-    dynamic realValue = widget.value ?? _value;
     if (realValue == value) {
       return;
     }
@@ -57,6 +58,12 @@ class _BaseRadioState extends State<BaseRadio> {
     return Row(
       children: widget.options.map((item) {
         bool isDisabled = (item.disabled ?? widget.disabled) ?? false;
+        Color? color;
+        if (isDisabled) {
+          color = Colors.grey;
+        } else if (realValue == item.value) {
+          color = Theme.of(context).colorScheme.primary;
+        }
         return GestureDetector(
           behavior: HitTestBehavior.translucent,
           onTap: () {
@@ -67,6 +74,7 @@ class _BaseRadioState extends State<BaseRadio> {
             child: Row(
               children: [
                 Radio(
+                    // 禁用颜色，或者onChanged给null
                     fillColor: isDisabled
                         ? MaterialStateColor.resolveWith((states) {
                             return Colors.grey;
@@ -77,7 +85,7 @@ class _BaseRadioState extends State<BaseRadio> {
                     onChanged: _onChanged),
                 Text(
                   item.label,
-                  style: TextStyle(color: isDisabled ? Colors.grey : null),
+                  style: TextStyle(color: color),
                 )
               ],
             ),

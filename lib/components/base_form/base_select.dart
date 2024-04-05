@@ -1,15 +1,15 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'package:flutter_haokezu/model/select_option.dart';
+import 'package:flutter_haokezu/model/base_select_option.dart';
 import 'package:flutter_haokezu/utils/helper.dart';
 import 'package:flutter_haokezu/utils/select_picker/index.dart';
 
-class BaseSelect extends StatefulWidget {
+class BaseSelect<T extends BaseSelectOption> extends StatefulWidget {
   final String? placeholder;
   bool? disabled;
   dynamic value;
-  List<SelectOption> options;
+  List<T> options;
   Function(dynamic value)? onChange;
 
   BaseSelect(
@@ -21,10 +21,11 @@ class BaseSelect extends StatefulWidget {
       this.onChange});
 
   @override
-  State<BaseSelect> createState() => _BaseSelectState();
+  State<BaseSelect> createState() => _BaseSelectState<T>();
 }
 
-class _BaseSelectState extends State<BaseSelect> {
+class _BaseSelectState<T extends BaseSelectOption>
+    extends State<BaseSelect<T>> {
   dynamic _value;
 
   dynamic get _realValue => widget.value ?? _value;
@@ -51,7 +52,7 @@ class _BaseSelectState extends State<BaseSelect> {
             fontSize: 16),
       );
     }
-    SelectOption? option = CommonUtils.findItemByList(
+    T? option = CommonUtils.findItemByList(
         widget.options, (element) => element.value == _realValue);
 
     return Text(

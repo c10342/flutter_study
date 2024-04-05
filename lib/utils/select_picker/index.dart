@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_haokezu/model/select_option.dart';
+import 'package:flutter_haokezu/model/base_select_option.dart';
 import 'package:flutter_haokezu/utils/select_picker/select_list.dart';
 
 class SelectPicker {
-  static showBottomSheet(BuildContext context, List<SelectOption> options,
+  static showBottomSheet<T extends BaseSelectOption>(
+      BuildContext context, List<T> options,
       {Function(dynamic value)? onConfirm, dynamic value}) {
     return showModalBottomSheet(
       // shape: const BeveledRectangleBorder(

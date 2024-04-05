@@ -16,7 +16,7 @@ class GroupTitle extends StatelessWidget {
           Text(
             title,
             style: const TextStyle(
-                color: Colors.black, fontWeight: FontWeight.w700, fontSize: 16),
+                color: Colors.black, fontWeight: FontWeight.w700, fontSize: 18),
           ),
           if (children != null)
             Column(
