@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_haokezu/components/base_form/provider.dart';
 
 class BaseFormItem extends StatelessWidget {
-  final String label;
+  final String? label;
   final double? labelWidth;
   final Widget? suffix;
   final Widget? content;
@@ -10,7 +10,7 @@ class BaseFormItem extends StatelessWidget {
 
   const BaseFormItem(
       {super.key,
-      required this.label,
+      this.label,
       this.suffix,
       this.content,
       this.suffixText,
@@ -24,13 +24,15 @@ class BaseFormItem extends StatelessWidget {
           border: Border(bottom: BorderSide(color: Colors.black))),
       child: Row(
         children: [
-          SizedBox(
-            width: labelWidth ?? formProvider?.labelWidth,
-            child: Text(
-              label,
-              style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+          if (label != null && label != '')
+            SizedBox(
+              width: labelWidth ?? formProvider?.labelWidth,
+              child: Text(
+                label!,
+                style:
+                    const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+              ),
             ),
-          ),
           if (content != null) Expanded(child: content!),
           if (suffixText != null)
             Padding(

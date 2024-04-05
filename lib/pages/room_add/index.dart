@@ -141,12 +141,31 @@ class _RoomAddPageState extends State<RoomAddPage> {
               ),
               GroupTitle(
                 title: '房屋标题',
+                children: [
+                  BaseFormItem(
+                    content: BaseInput(
+                      border: InputBorder.none,
+                      placeholder: '请输入房屋标题',
+                      autofocus: false,
+                    ),
+                  ),
+                ],
               ),
               GroupTitle(
                 title: '房屋配置',
               ),
               GroupTitle(
                 title: '房屋描述',
+                children: [
+                  BaseFormItem(
+                    content: BaseInput(
+                      minLines: 4,
+                      border: InputBorder.none,
+                      placeholder: '请输入房屋描述',
+                      autofocus: false,
+                    ),
+                  ),
+                ],
               )
             ])
           ],

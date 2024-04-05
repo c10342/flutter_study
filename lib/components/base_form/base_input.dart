@@ -10,6 +10,8 @@ class BaseInput extends StatefulWidget {
   String? value;
   void Function(String value)? onChanged;
   bool? disabled;
+  int? minLines;
+  int? maxLines;
   BaseInput(
       {super.key,
       this.password,
@@ -19,7 +21,9 @@ class BaseInput extends StatefulWidget {
       this.onChanged,
       this.autofocus,
       this.value,
-      this.disabled});
+      this.disabled,
+      this.minLines,
+      this.maxLines});
 
   @override
   State<BaseInput> createState() => _BaseInputState();
@@ -43,6 +47,10 @@ class _BaseInputState extends State<BaseInput> {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      minLines: widget.minLines,
+      maxLines: widget.minLines != null && widget.maxLines == null
+          ? (widget.minLines! + 5)
+          : null,
       enabled: widget.disabled == true ? false : true,
       controller: _controller,
       // 密码输入
