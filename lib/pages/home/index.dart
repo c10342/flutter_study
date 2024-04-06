@@ -5,7 +5,7 @@ import 'package:flutter_haokezu/pages/home/home.dart';
 import 'package:flutter_haokezu/pages/home/info.dart';
 import 'package:flutter_haokezu/pages/home/my.dart';
 import 'package:flutter_haokezu/pages/home/helper/provider.dart';
-import 'package:flutter_haokezu/pages/home/search.dart';
+import 'package:flutter_haokezu/pages/home/search/index.dart';
 import 'package:flutter_haokezu/routes.dart';
 
 List<BottomNavigationBarItem> tabItems = [

@@ -5,6 +5,7 @@ import 'package:flutter_haokezu/components/base_list_view.dart';
 import 'package:flutter_haokezu/components/base_page_layout.dart';
 import 'package:flutter_haokezu/components/base_search_bar.dart';
 import 'package:flutter_haokezu/pages/home/components/room_card.dart';
+import 'package:flutter_haokezu/pages/home/search/filter_bar.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class SearchView extends StatefulWidget {
@@ -73,25 +74,32 @@ class _SearchViewState extends State<SearchView>
           ),
         ),
       ),
-      body: BaseListViewBuilder(
-          onRefresh: () async {
-            await Future.delayed(const Duration(milliseconds: 1000));
-            refreshController.refreshCompleted();
-          },
-          onLoading: () async {
-            await Future.delayed(const Duration(milliseconds: 1000));
-            refreshController.loadComplete();
-          },
-          refreshController: refreshController,
-          list: list,
-          itemBuilder: (BuildContext context, RoomCardItem data, int index) {
-            return Container(
-              margin: const EdgeInsets.only(bottom: 10),
-              child: RoomCard(
-                item: data,
-              ),
-            );
-          }),
+      body: Column(
+        children: [
+          const FilterBar(),
+          Expanded(
+              child: BaseListViewBuilder(
+                  onRefresh: () async {
+                    await Future.delayed(const Duration(milliseconds: 1000));
+                    refreshController.refreshCompleted();
+                  },
+                  onLoading: () async {
+                    await Future.delayed(const Duration(milliseconds: 1000));
+                    refreshController.loadComplete();
+                  },
+                  refreshController: refreshController,
+                  list: list,
+                  itemBuilder:
+                      (BuildContext context, RoomCardItem data, int index) {
+                    return Container(
+                      margin: const EdgeInsets.only(bottom: 10),
+                      child: RoomCard(
+                        item: data,
+                      ),
+                    );
+                  }))
+        ],
+      ),
     );
   }
 }

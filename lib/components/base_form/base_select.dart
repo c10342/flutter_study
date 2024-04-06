@@ -70,7 +70,7 @@ class _BaseSelectState<T extends BaseSelectOption>
         if (_disabled) {
           return;
         }
-        SelectPicker.showBottomSheet(
+        SelectPicker.singlePicker(
           context,
           widget.options,
           value: _realValue,
