@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_haokezu/model/base_select_option.dart';
-import 'package:flutter_haokezu/utils/widget_utils/drawer_page.dart';
 import 'package:flutter_haokezu/utils/widget_utils/multiple_select_list.dart';
 import 'package:flutter_haokezu/utils/widget_utils/single_select_list.dart';
 
@@ -83,25 +82,25 @@ class WidgetUtils {
   }
 
   static showDrawer(BuildContext context,
-      {double? width,
-      Widget? Function(BuildContext context)? builder,
-      bool? isDismissible}) {
-    Navigator.push(
-      context,
-      PageRouteBuilder(
-          // 设置透明页面
-          opaque: false,
-          pageBuilder: (BuildContext context, Animation<double> animation,
-              Animation<double> secondaryAnimation) {
-            return DrawerPage(
-              width: width,
-              builder: builder,
-            );
-          }),
-    );
-    // Navigator.push(
-    //   context,
-    //   MaterialPageRoute(builder: (context) => DrawerPage()),
-    // );
+      {double? width, required Widget content, bool? isDismissible}) {
+    showDialog(
+        context: context,
+        useSafeArea: false,
+        builder: (context) {
+          return Stack(
+            children: [
+              Positioned(
+                top: 0,
+                right: 0,
+                bottom: 0,
+                width: width ?? MediaQuery.of(context).size.width * 0.7,
+                child: Container(
+                  decoration: const BoxDecoration(color: Colors.white),
+                  child: content,
+                ),
+              )
+            ],
+          );
+        });
   }
 }

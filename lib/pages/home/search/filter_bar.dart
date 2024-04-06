@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_haokezu/components/base_form/base_checkbox.dart';
 import 'package:flutter_haokezu/components/base_group_title.dart';
 import 'package:flutter_haokezu/model/base_select_option.dart';
+import 'package:flutter_haokezu/pages/home/search/drawer.dart';
+// import 'package:flutter_haokezu/utils/widget_utils/drawer_page.dart';
 import 'package:flutter_haokezu/utils/widget_utils/index.dart';
 
 class Item extends StatelessWidget {
@@ -150,53 +152,20 @@ class _FilterBarState extends State<FilterBar> {
               onTap: () {
                 WidgetUtils.showDrawer(
                   context,
-                  builder: (context) {
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        buildGroup('房屋类型', [
-                          BaseSelectOption(label: '单间', value: 0),
-                          BaseSelectOption(
-                            label: '一房一厅',
-                            value: 1,
-                          ),
-                          BaseSelectOption(
-                            label: '两房一厅',
-                            value: 2,
-                          ),
-                          BaseSelectOption(label: '三房一厅', value: 3),
-                        ], onChanged: (value) {
-                          setState(() {
-                            _selectRoomType = value;
-                          });
-                        }, value: _selectRoomType),
-                        buildGroup('房屋配置', [
-                          BaseSelectOption(label: '电视', value: 0),
-                          BaseSelectOption(
-                            label: '洗衣机',
-                            value: 1,
-                          ),
-                          BaseSelectOption(
-                            label: '空调',
-                            value: 2,
-                          ),
-                          BaseSelectOption(label: '电风扇', value: 3),
-                          BaseSelectOption(
-                            label: '投影仪',
-                            value: 4,
-                          ),
-                          BaseSelectOption(
-                            label: '热水器',
-                            value: 5,
-                          ),
-                        ], onChanged: (value) {
-                          setState(() {
-                            _selectConfig = value;
-                          });
-                        }, value: _selectConfig),
-                      ],
-                    );
-                  },
+                  content: DrawerPage(
+                    selectRoomType: _selectRoomType,
+                    selectConfig: _selectConfig,
+                    onConfigChange: (value) {
+                      setState(() {
+                        _selectConfig = value;
+                      });
+                    },
+                    onRoomTypeChange: (value) {
+                      setState(() {
+                        _selectRoomType = value;
+                      });
+                    },
+                  ),
                 );
               },
               isActive: _selectRoomType.isNotEmpty || _selectConfig.isNotEmpty),
