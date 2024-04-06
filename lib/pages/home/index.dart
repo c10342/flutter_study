@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_haokezu/components/base_page_layout.dart';
-import 'package:flutter_haokezu/pages/home/controller.dart';
+import 'package:flutter_haokezu/pages/home/helper/controller.dart';
 import 'package:flutter_haokezu/pages/home/home.dart';
 import 'package:flutter_haokezu/pages/home/info.dart';
 import 'package:flutter_haokezu/pages/home/my.dart';
-import 'package:flutter_haokezu/pages/home/provider.dart';
+import 'package:flutter_haokezu/pages/home/helper/provider.dart';
 import 'package:flutter_haokezu/pages/home/search.dart';
 import 'package:flutter_haokezu/routes.dart';
 

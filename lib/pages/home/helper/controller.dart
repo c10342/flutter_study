@@ -1,4 +1,4 @@
-import 'package:flutter_haokezu/pages/home/provider.dart';
+import 'package:flutter_haokezu/pages/home/helper/provider.dart';
 
 class UpdateController {
   List<UpdateCallback> callbacks = [];

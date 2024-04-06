@@ -8,7 +8,7 @@ import 'package:flutter_haokezu/components/base_swiper.dart';
 import 'package:flutter_haokezu/pages/home/components/index_info.dart';
 import 'package:flutter_haokezu/pages/home/components/index_navigator.dart';
 import 'package:flutter_haokezu/pages/home/components/index_recommend.dart';
-import 'package:flutter_haokezu/pages/home/controller.dart';
+import 'package:flutter_haokezu/pages/home/helper/controller.dart';
 
 class HomeView extends StatefulWidget {
   int activeIndex;

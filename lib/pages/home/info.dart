@@ -6,8 +6,8 @@ import 'package:flutter_haokezu/components/base_list_view.dart';
 import 'package:flutter_haokezu/components/base_page_layout.dart';
 import 'package:flutter_haokezu/components/base_search_bar.dart';
 import 'package:flutter_haokezu/pages/home/components/info_card.dart';
-import 'package:flutter_haokezu/pages/home/controller.dart';
-import 'package:flutter_haokezu/pages/home/provider.dart';
+import 'package:flutter_haokezu/pages/home/helper/controller.dart';
+import 'package:flutter_haokezu/pages/home/helper/provider.dart';
 import 'package:flutter_haokezu/utils/easy_loading.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
