@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_haokezu/model/base_select_option.dart';
 import 'package:flutter_haokezu/utils/helper.dart';
-import 'package:flutter_haokezu/utils/select_picker/index.dart';
+import 'package:flutter_haokezu/utils/widget_utils/index.dart';
 
 class BaseSelect<T extends BaseSelectOption> extends StatefulWidget {
   final String? placeholder;
@@ -70,7 +70,7 @@ class _BaseSelectState<T extends BaseSelectOption>
         if (_disabled) {
           return;
         }
-        SelectPicker.singlePicker(
+        WidgetUtils.singlePicker(
           context,
           widget.options,
           value: _realValue,

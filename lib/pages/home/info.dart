@@ -8,7 +8,7 @@ import 'package:flutter_haokezu/components/base_search_bar.dart';
 import 'package:flutter_haokezu/pages/home/components/info_card.dart';
 import 'package:flutter_haokezu/pages/home/helper/controller.dart';
 import 'package:flutter_haokezu/pages/home/helper/provider.dart';
-import 'package:flutter_haokezu/utils/easy_loading.dart';
+import 'package:flutter_haokezu/utils/widget_utils/index.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class InfoView extends StatefulWidget {
@@ -63,7 +63,7 @@ class _InfoViewState extends State<InfoView>
 
   Future getList({bool showLoading = true}) async {
     if (showLoading == true) {
-      EasyUtils.loading();
+      WidgetUtils.showLoading();
     }
     await Future.delayed(const Duration(milliseconds: 5000));
     List<InfoItem> data = [];
@@ -91,7 +91,7 @@ class _InfoViewState extends State<InfoView>
         list.addAll(data);
       }
     });
-    EasyUtils.close();
+    WidgetUtils.closeLoading();
   }
 
   @override

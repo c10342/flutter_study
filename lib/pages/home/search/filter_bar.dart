@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_haokezu/model/base_select_option.dart';
-import 'package:flutter_haokezu/utils/select_picker/index.dart';
+import 'package:flutter_haokezu/utils/widget_utils/index.dart';
 
 class Item extends StatelessWidget {
   final String title;
@@ -62,7 +62,7 @@ class _FilterBarState extends State<FilterBar> {
           Item(
               title: '区域',
               onTap: () {
-                SelectPicker.singlePicker<BaseSelectOption, int>(
+                WidgetUtils.singlePicker<BaseSelectOption, int>(
                   context,
                   [
                     BaseSelectOption(label: '北京', value: 1),
@@ -85,7 +85,7 @@ class _FilterBarState extends State<FilterBar> {
           Item(
               title: '方式',
               onTap: () {
-                SelectPicker.multiplePicker(
+                WidgetUtils.multiplePicker(
                   context,
                   [
                     BaseSelectOption(label: '北京', value: 1, disabled: true),
@@ -109,7 +109,12 @@ class _FilterBarState extends State<FilterBar> {
               },
               isActive: _selectType.isNotEmpty),
           Item(title: '租金', onTap: () {}, isActive: false),
-          Item(title: '筛选', onTap: () {}, isActive: false),
+          Item(
+              title: '筛选',
+              onTap: () {
+                // SelectPicker.showDrawer(context);
+              },
+              isActive: false),
         ],
       ),
     );
