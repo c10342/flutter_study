@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 class BaseGroupTitle extends StatelessWidget {
   final String title;
   final List<Widget>? children;
+  final EdgeInsetsGeometry? padding;
 
-  const BaseGroupTitle({super.key, required this.title, this.children});
+  const BaseGroupTitle(
+      {super.key, required this.title, this.children, this.padding});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(10),
+    return Container(
+      padding: padding ?? const EdgeInsets.all(10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
