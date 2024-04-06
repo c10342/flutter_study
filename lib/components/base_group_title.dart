@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class GroupTitle extends StatelessWidget {
+class BaseGroupTitle extends StatelessWidget {
   final String title;
   final List<Widget>? children;
 
-  const GroupTitle({super.key, required this.title, this.children});
+  const BaseGroupTitle({super.key, required this.title, this.children});
 
   @override
   Widget build(BuildContext context) {
@@ -18,10 +18,7 @@ class GroupTitle extends StatelessWidget {
             style: const TextStyle(
                 color: Colors.black, fontWeight: FontWeight.w700, fontSize: 18),
           ),
-          if (children != null)
-            Column(
-              children: children!,
-            )
+          if (children != null) ...children!,
         ],
       ),
     );

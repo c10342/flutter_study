@@ -11,7 +11,7 @@ import 'package:flutter_haokezu/components/base_icon.dart';
 import 'package:flutter_haokezu/components/base_list_view.dart';
 import 'package:flutter_haokezu/components/base_page_layout.dart';
 import 'package:flutter_haokezu/model/base_select_option.dart';
-import 'package:flutter_haokezu/pages/room_add/group_title.dart';
+import 'package:flutter_haokezu/components/base_group_title.dart';
 
 class CheckboxOptions extends BaseSelectOption {
   int codePoint;
@@ -38,7 +38,7 @@ class _RoomAddPageState extends State<RoomAddPage> {
         body: BaseListView(
           children: [
             BaseForm(labelWidth: 100, children: [
-              GroupTitle(
+              BaseGroupTitle(
                 title: '房源信息',
                 children: [
                   BaseFormItem(
@@ -151,11 +151,11 @@ class _RoomAddPageState extends State<RoomAddPage> {
                   ),
                 ],
               ),
-              GroupTitle(
+              BaseGroupTitle(
                 title: '房屋图像',
                 children: [BaseImagePicker()],
               ),
-              GroupTitle(
+              BaseGroupTitle(
                 title: '房屋标题',
                 children: [
                   BaseFormItem(
@@ -167,7 +167,7 @@ class _RoomAddPageState extends State<RoomAddPage> {
                   ),
                 ],
               ),
-              GroupTitle(
+              BaseGroupTitle(
                 title: '房屋配置',
                 children: [
                   BaseFormItem(
@@ -239,7 +239,7 @@ class _RoomAddPageState extends State<RoomAddPage> {
                   )
                 ],
               ),
-              GroupTitle(
+              BaseGroupTitle(
                 title: '房屋描述',
                 children: [
                   BaseFormItem(
