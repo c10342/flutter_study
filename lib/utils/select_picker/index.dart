@@ -6,7 +6,7 @@ import 'package:flutter_haokezu/utils/select_picker/single_select_list.dart';
 class SelectPicker {
   static singlePicker<T extends BaseSelectOption, V>(
       BuildContext context, List<T> options,
-      {Function(V value)? onConfirm, V? value}) {
+      {void Function(V value)? onConfirm, V? value}) {
     return showModalBottomSheet(
       // shape: const BeveledRectangleBorder(
       //     // 取消圆角
@@ -37,9 +37,9 @@ class SelectPicker {
     );
   }
 
-  static multiplePicker<T extends BaseSelectOption, V>(
+  static multiplePicker<T extends BaseSelectOption, V extends dynamic>(
       BuildContext context, List<T> options,
-      {Function(List<V> value)? onConfirm, List<V>? value}) {
+      {void Function(List<V> value)? onConfirm, List<V>? value}) {
     return showModalBottomSheet(
       context: context,
       builder: (context) {

@@ -85,20 +85,19 @@ class _FilterBarState extends State<FilterBar> {
           Item(
               title: '方式',
               onTap: () {
-                SelectPicker.multiplePicker<BaseSelectOption, int>(
+                SelectPicker.multiplePicker(
                   context,
                   [
-                    BaseSelectOption<int>(
-                        label: '北京', value: 1, disabled: true),
-                    BaseSelectOption<int>(label: '上海', value: 2),
-                    BaseSelectOption<int>(label: '成都', value: 3),
-                    BaseSelectOption<int>(label: '深圳', value: 4),
-                    BaseSelectOption<int>(label: '广州', value: 5),
-                    BaseSelectOption<int>(label: '杭州', value: 6),
-                    BaseSelectOption<int>(label: '重庆', value: 7),
-                    BaseSelectOption<int>(label: '江门', value: 7),
-                    BaseSelectOption<int>(label: '茂名', value: 7),
-                    BaseSelectOption<int>(label: '湛江', value: 7),
+                    BaseSelectOption(label: '北京', value: 1, disabled: true),
+                    BaseSelectOption(label: '上海', value: 2),
+                    BaseSelectOption(label: '成都', value: 3),
+                    BaseSelectOption(label: '深圳', value: 4),
+                    BaseSelectOption(label: '广州', value: 5),
+                    BaseSelectOption(label: '杭州', value: 6),
+                    BaseSelectOption(label: '重庆', value: 7),
+                    BaseSelectOption(label: '江门', value: 7),
+                    BaseSelectOption(label: '茂名', value: 7),
+                    BaseSelectOption(label: '湛江', value: 7),
                   ],
                   value: _selectType,
                   onConfirm: (value) {
