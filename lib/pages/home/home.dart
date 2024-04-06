@@ -5,10 +5,10 @@ import 'package:flutter_haokezu/components/base_list_view.dart';
 import 'package:flutter_haokezu/components/base_page_layout.dart';
 import 'package:flutter_haokezu/components/base_search_bar.dart';
 import 'package:flutter_haokezu/components/base_swiper.dart';
-import 'package:flutter_haokezu/pages/home/components/index_info.dart';
 import 'package:flutter_haokezu/pages/home/components/index_navigator.dart';
 import 'package:flutter_haokezu/pages/home/components/index_recommend.dart';
 import 'package:flutter_haokezu/pages/home/helper/controller.dart';
+import 'package:flutter_haokezu/widgets/info_title_list.dart';
 
 class HomeView extends StatefulWidget {
   int activeIndex;
@@ -70,7 +70,9 @@ class _HomeViewState extends State<HomeView>
           ),
           IndexNavigator(),
           IndexRecommend(),
-          IndexInfo(),
+          InfoTitleList(
+            title: '最新资讯',
+          ),
           Padding(padding: EdgeInsets.all(5))
         ],
       ),

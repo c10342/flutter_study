@@ -13,10 +13,10 @@ final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
 
 class Routes {
   // 1、定义路由名称
-  static String home = '/aa';
+  static String home = '/';
   static String login = '/login';
-  // static String roomDetail = '/roomDetail/:roomId';
-  static String roomDetail = '/';
+  static String roomDetail = '/roomDetail/:roomId';
+  // static String roomDetail = '/';
   static String register = '/register';
   static String setting = '/setting';
   static String roomManage = '/roomManage';

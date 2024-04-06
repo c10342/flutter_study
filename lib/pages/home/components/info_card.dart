@@ -20,43 +20,48 @@ class InfoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 100,
-      padding: const EdgeInsets.all(8),
-      decoration: const BoxDecoration(color: Colors.white),
-      child: Row(
-        children: [
-          Container(
-            margin: const EdgeInsets.only(right: 10),
-            child: BaseImage(
-              src: item.imageUrl,
-              width: 120,
-              height: 84,
-            ),
-          ),
-          Expanded(
-              child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                item.title,
-                style: const TextStyle(
-                    color: Colors.black, fontWeight: FontWeight.w600),
-                maxLines: 3,
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).pushNamed('/roomDetail/1');
+      },
+      child: Container(
+        height: 100,
+        padding: const EdgeInsets.all(8),
+        decoration: const BoxDecoration(color: Colors.white),
+        child: Row(
+          children: [
+            Container(
+              margin: const EdgeInsets.only(right: 10),
+              child: BaseImage(
+                src: item.imageUrl,
+                width: 120,
+                height: 84,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    item.source,
-                    style: const TextStyle(color: Colors.black54),
-                  ),
-                  Text(item.time)
-                ],
-              )
-            ],
-          ))
-        ],
+            ),
+            Expanded(
+                child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  item.title,
+                  style: const TextStyle(
+                      color: Colors.black, fontWeight: FontWeight.w600),
+                  maxLines: 3,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      item.source,
+                      style: const TextStyle(color: Colors.black54),
+                    ),
+                    Text(item.time)
+                  ],
+                )
+              ],
+            ))
+          ],
+        ),
       ),
     );
   }

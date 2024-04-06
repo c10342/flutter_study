@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_haokezu/components/base_list_view.dart';
 import 'package:flutter_haokezu/components/base_page_layout.dart';
-import 'package:flutter_haokezu/pages/home/components/index_info.dart';
 import 'package:flutter_haokezu/pages/home/components/my_advertisement.dart';
 import 'package:flutter_haokezu/pages/home/components/my_function.dart';
 import 'package:flutter_haokezu/pages/home/components/my_info.dart';
 import 'package:flutter_haokezu/routes.dart';
+import 'package:flutter_haokezu/widgets/info_title_list.dart';
 
 class MyView extends StatefulWidget {
   const MyView({super.key});
@@ -37,7 +37,9 @@ class _MyViewState extends State<MyView> with AutomaticKeepAliveClientMixin {
           MyInfo(),
           MyFunction(),
           MyAdvertisement(),
-          IndexInfo()
+          InfoTitleList(
+            title: '最新资讯',
+          ),
         ],
       ),
     );
