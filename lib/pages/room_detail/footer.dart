@@ -14,6 +14,7 @@ class _FooterState extends State<Footer> {
 
   @override
   Widget build(BuildContext context) {
+    // 需要有宽高
     return Positioned(
         bottom: 0,
         left: 0,

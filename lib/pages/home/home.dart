@@ -61,7 +61,13 @@ class _HomeViewState extends State<HomeView>
       headerBgColor: Colors.white,
       body: BaseListView(
         children: const [
-          BaseSwiper(),
+          BaseSwiper(
+            images: [
+              'https://img2.baidu.com/it/u=1028011339,1319212411&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=313',
+              'https://img1.baidu.com/it/u=2205810988,4283060315&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500',
+              'https://pic.rmb.bdstatic.com/bjh/914b8c0f9814b14c5fedeec7ec6615df5813.jpeg'
+            ],
+          ),
           IndexNavigator(),
           IndexRecommend(),
           IndexInfo(),
