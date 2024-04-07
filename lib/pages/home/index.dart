@@ -28,24 +28,18 @@ class _HomePageState extends RouteLifeState<HomePage> {
   UpdateController updateController = UpdateController();
 
   @override
-  void didPush() {
-    print('跳转该页面而显示');
-  }
+  void didPush() {}
 
   @override
-  void didPop() {
-    print('当前页面被pop而隐藏');
-  }
+  void didPop() {}
 
   @override
   void didPopNext() {
-    print('上一个页面关闭而显示');
     updateController.update(selectIndex, ActiveType.Show);
   }
 
   @override
   void didPushNext() {
-    print('跳转下一个页面而隐藏');
     updateController.update(selectIndex, ActiveType.Hide);
   }
 
