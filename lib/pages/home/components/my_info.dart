@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_haokezu/routes.dart';
+import 'package:flutter_haokezu/state/user.dart';
+import 'package:provider/provider.dart';
 
 TextStyle textStyle = const TextStyle(
     color: Colors.white, fontSize: 18, fontWeight: FontWeight.w600);
@@ -64,6 +66,7 @@ class _MyInfoState extends State<MyInfo> {
   }
 
   Widget loginView() {
+    final UserState user = Provider.of<UserState>(context);
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -81,7 +84,7 @@ class _MyInfoState extends State<MyInfo> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('已登录用户名', style: textStyle),
+            Text('已登录用户名:${user.userInfo?.userName ?? ''}', style: textStyle),
             const Text(
               '查看编辑个人资料',
               style: TextStyle(
@@ -97,10 +100,11 @@ class _MyInfoState extends State<MyInfo> {
 
   @override
   Widget build(BuildContext context) {
+    final UserState user = Provider.of<UserState>(context);
     return Container(
       height: 120,
       decoration: BoxDecoration(color: Theme.of(context).colorScheme.primary),
-      child: isLogin ? loginView() : noLoginView(),
+      child: user.token.isNotEmpty ? loginView() : noLoginView(),
     );
   }
 }

@@ -2,9 +2,19 @@ import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_haokezu/routes.dart';
+import 'package:flutter_haokezu/state/system.dart';
+import 'package:flutter_haokezu/state/user.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  // runApp(const MyApp());
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider<UserState>(create: (context) => UserState()),
+      ChangeNotifierProvider<SystemState>(create: (context) => SystemState()),
+    ],
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
