@@ -48,9 +48,12 @@ class _BaseInputState extends State<BaseInput> {
   Widget build(BuildContext context) {
     return TextField(
       minLines: widget.minLines,
-      maxLines: widget.minLines != null && widget.maxLines == null
+      // obscureText为true时，maxLines只能为1或者不设置该参数，否则会报错
+      maxLines: widget.minLines != null &&
+              widget.maxLines == null &&
+              widget.password != true
           ? (widget.minLines! + 5)
-          : null,
+          : 1,
       enabled: widget.disabled == true ? false : true,
       controller: _controller,
       // 密码输入

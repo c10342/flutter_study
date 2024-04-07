@@ -57,6 +57,8 @@ class _LoginPageState extends State<LoginPage> {
                     } else {
                       user.setUserInfo(
                           UserInfo(userName: userName, id: password));
+                      user.setToken('token');
+                      Navigator.of(context).pop();
                     }
                   },
                   child: const Text('登录')),
