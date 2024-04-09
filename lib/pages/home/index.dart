@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_haokezu/api/cnode.dart';
 import 'package:flutter_haokezu/components/base_page_layout.dart';
 import 'package:flutter_haokezu/pages/home/helper/controller.dart';
 import 'package:flutter_haokezu/pages/home/home.dart';
@@ -47,6 +48,8 @@ class _HomePageState extends RouteLifeState<HomePage> {
   void initState() {
     _pageController = PageController(initialPage: selectIndex);
     super.initState();
+
+    getList();
   }
 
   @override
@@ -100,5 +103,11 @@ class _HomePageState extends RouteLifeState<HomePage> {
         selectedItemColor: Theme.of(context).colorScheme.primary,
       ),
     );
+  }
+
+  void getList() async {
+    GetTopicsListRespond? res = await Cnode.getTopicsList(page: 1, limit: 10);
+
+    if (res.success == true) {}
   }
 }
