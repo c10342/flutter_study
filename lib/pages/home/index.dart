@@ -8,6 +8,7 @@ import 'package:flutter_haokezu/pages/home/info.dart';
 import 'package:flutter_haokezu/pages/home/my.dart';
 import 'package:flutter_haokezu/pages/home/helper/provider.dart';
 import 'package:flutter_haokezu/pages/home/search/index.dart';
+import 'package:flutter_haokezu/utils/helper.dart';
 
 List<BottomNavigationBarItem> tabItems = [
   const BottomNavigationBarItem(icon: Icon(Icons.home), label: '首页'),
@@ -31,24 +32,24 @@ class _HomePageState extends State<HomePage>
 
   @override
   void didPush() {
-    print('didPush');
+    CommonUtils.log('didPush');
   }
 
   @override
   void didPop() {
-    print('didPop');
+    CommonUtils.log('didPop');
   }
 
   @override
   void didPopNext() {
     updateController.update(selectIndex, ActiveType.Show);
-    print('didPopNext');
+    CommonUtils.log('didPopNext');
   }
 
   @override
   void didPushNext() {
     updateController.update(selectIndex, ActiveType.Hide);
-    print('didPushNext');
+    CommonUtils.log('didPushNext');
   }
 
   @override

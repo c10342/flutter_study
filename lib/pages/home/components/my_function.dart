@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_haokezu/components/base_image.dart';
 import 'package:flutter_haokezu/routes.dart';
+import 'package:flutter_haokezu/utils/helper.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class FunctionItem {
@@ -15,13 +16,13 @@ class FunctionItem {
 final List<FunctionItem> list = [
   FunctionItem(
       imageUrl: 'static/images/home_profile_record.png',
-      title: "看房记录",
+      title: "腾讯会议",
       onTap: (context) async {
         // wemeet://page/inmeeting?meeting_code=你的会议号
         final Uri url = Uri.parse('wemeet://page/inmeeting?meeting_code=你的会议号');
         canLaunchUrl(url);
         if (!await launchUrl(url)) {
-          print('Could not launch $url');
+          CommonUtils.log('Could not launch $url');
         }
       }),
   FunctionItem(

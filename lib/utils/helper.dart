@@ -11,4 +11,9 @@ class CommonUtils {
 
   static final GlobalKey<NavigatorState> navigatorKey =
       GlobalKey<NavigatorState>();
+
+  static void log(Object? object) {
+    // ignore: avoid_print
+    print('haokezu:$object');
+  }
 }

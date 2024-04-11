@@ -40,7 +40,14 @@ class MyApp extends StatelessWidget {
           primary: Colors.green,
         ), // 设置AppBar的主题色
       ),
-      onGenerateRoute: router.generator,
+      onGenerateRoute: (settings) {
+        // 路由拦截
+        // if ('/roomDetail/1' == settings.name) {
+        //   settings =
+        //       RouteSettings(arguments: settings.arguments, name: Routes.login);
+        // }
+        return router.generator(settings);
+      },
       builder: EasyLoading.init(),
     );
   }
