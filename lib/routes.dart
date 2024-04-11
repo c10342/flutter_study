@@ -8,19 +8,79 @@ import 'package:flutter_haokezu/pages/room_add/index.dart';
 import 'package:flutter_haokezu/pages/room_detail/index.dart';
 import 'package:flutter_haokezu/pages/room_manage/index.dart';
 import 'package:flutter_haokezu/pages/setting.dart';
+import 'package:flutter_haokezu/utils/helper.dart';
 
-final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
+String handleName(String name,
+    {Map<String, String>? params, Map<String, dynamic>? query}) {
+  params?.keys.forEach((key) {
+    RegExp reg = RegExp(":${key}");
+    name = name.replaceFirstMapped(reg, (match) => params[key]!);
+  });
+
+  Uri uri = Uri(
+    path: name,
+    queryParameters: query,
+  );
+  return uri.toString();
+}
 
 class Routes {
   // 1、定义路由名称
   static String home = '/';
   static String login = '/login';
   static String roomDetail = '/roomDetail/:roomId';
-  // static String roomDetail = '/';
   static String register = '/register';
   static String setting = '/setting';
   static String roomManage = '/roomManage';
   static String roomAdd = '/roomAdd';
+
+  static final RouteObserver<PageRoute> routeObserver =
+      RouteObserver<PageRoute>();
+
+  static Future<T?>? pushName<T extends Object?>(String name,
+      {BuildContext? context,
+      Map<String, String>? params,
+      Map<String, dynamic>? query}) {
+    BuildContext? ctx = context ?? CommonUtils.navigatorKey.currentContext;
+    if (ctx == null) {
+      return null;
+    }
+
+    return Navigator.of(ctx)
+        .pushNamed(handleName(name, params: params, query: query));
+  }
+
+  static void pop({BuildContext? context}) {
+    BuildContext? ctx = context ?? CommonUtils.navigatorKey.currentContext;
+    if (ctx == null) {
+      return;
+    }
+    return Navigator.of(ctx).pop();
+  }
+
+  static Future<T?>? replace<T extends Object?>(String name,
+      {BuildContext? context,
+      Map<String, String>? params,
+      Map<String, dynamic>? query}) {
+    BuildContext? ctx = context ?? CommonUtils.navigatorKey.currentContext;
+    if (ctx == null) {
+      return null;
+    }
+    return Navigator.of(ctx)
+        .pushReplacementNamed(handleName(name, params: params, query: query));
+  }
+
+  static Future<T?>? clearAndPush<T extends Object?>(String name,
+      {BuildContext? context,
+      Map<String, String>? params,
+      Map<String, dynamic>? query}) {
+    BuildContext? ctx = context ?? CommonUtils.navigatorKey.currentContext;
+    if (ctx == null) {
+      return null;
+    }
+    return Navigator.of(ctx).pushNamedAndRemoveUntil(
+        handleName(name, params: params, query: query), (route) => false);
+  }
 
   // 2、定义处理函数
   static final Handler _homeHandler = Handler(
@@ -78,20 +138,5 @@ class Routes {
     router.define(roomManage, handler: _roomManageHandler);
     router.define(roomAdd, handler: _roomAddHandler);
     router.notFoundHandler = _notFoundHandler;
-  }
-}
-
-abstract class RouteLifeState<T extends StatefulWidget> extends State<T>
-    with RouteAware {
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    routeObserver.subscribe(this, ModalRoute.of(context) as PageRoute);
-  }
-
-  @override
-  void dispose() {
-    routeObserver.unsubscribe(this);
-    super.dispose();
   }
 }

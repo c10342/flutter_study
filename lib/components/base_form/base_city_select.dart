@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:flutter_haokezu/routes.dart';
 
 class BaseCitySelect extends StatelessWidget {
   final String? placeholder;
@@ -19,7 +20,7 @@ class BaseCitySelect extends StatelessWidget {
           if (isDisabled) {
             return;
           }
-          Navigator.of(context).pushNamed('search');
+          Routes.pushName('search');
         },
         child: SizedBox(
           height: 50,

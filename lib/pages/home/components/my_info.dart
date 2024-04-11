@@ -36,7 +36,7 @@ class _MyInfoState extends State<MyInfo> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Navigator.pushNamed(context, Routes.login);
+                    Routes.pushName(Routes.login);
                   },
                   child: Text('登录', style: textStyle),
                 ),
@@ -46,7 +46,7 @@ class _MyInfoState extends State<MyInfo> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.pushNamed(context, Routes.register);
+                    Routes.pushName(Routes.register);
                   },
                   child: Text('注册', style: textStyle),
                 ),

@@ -52,11 +52,7 @@ final List<FunctionItem> list = [
       imageUrl: 'static/images/home_profile_house.png',
       title: "房屋管理",
       onTap: (context) {
-        // bool isLogin = true; //假设先设置未登录
-        // if (isLogin) {
-        //   Navigator.pushNamed(context, 'roomManage');
-        // }
-        Navigator.of(context).pushNamed(Routes.roomManage);
+        Routes.pushName(Routes.roomManage);
       })
 ];
 

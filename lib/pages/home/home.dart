@@ -8,6 +8,7 @@ import 'package:flutter_haokezu/components/base_swiper.dart';
 import 'package:flutter_haokezu/pages/home/components/index_navigator.dart';
 import 'package:flutter_haokezu/pages/home/components/index_recommend.dart';
 import 'package:flutter_haokezu/pages/home/helper/controller.dart';
+import 'package:flutter_haokezu/routes.dart';
 import 'package:flutter_haokezu/widgets/info_title_list.dart';
 
 class HomeView extends StatefulWidget {
@@ -36,7 +37,7 @@ class _HomeViewState extends State<HomeView>
       pageBgColor: Colors.grey[100],
       header: BaseSearchBar(
         onClick: () {
-          Navigator.of(context).pushNamed('search');
+          Routes.pushName('search');
         },
         left: Container(
           margin: const EdgeInsets.only(right: 10),

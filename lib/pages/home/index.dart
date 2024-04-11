@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_haokezu/api/cnode.dart';
 import 'package:flutter_haokezu/components/base_page_layout.dart';
+import 'package:flutter_haokezu/mixins/route_lifecycle.dart';
 import 'package:flutter_haokezu/pages/home/helper/controller.dart';
 import 'package:flutter_haokezu/pages/home/home.dart';
 import 'package:flutter_haokezu/pages/home/info.dart';
 import 'package:flutter_haokezu/pages/home/my.dart';
 import 'package:flutter_haokezu/pages/home/helper/provider.dart';
 import 'package:flutter_haokezu/pages/home/search/index.dart';
-import 'package:flutter_haokezu/routes.dart';
 
 List<BottomNavigationBarItem> tabItems = [
   const BottomNavigationBarItem(icon: Icon(Icons.home), label: '首页'),
@@ -23,25 +23,32 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends RouteLifeState<HomePage> {
+class _HomePageState extends State<HomePage>
+    with RouteAware, RouteLifecycleMixin {
   int selectIndex = 0;
   late PageController _pageController;
   UpdateController updateController = UpdateController();
 
   @override
-  void didPush() {}
+  void didPush() {
+    print('didPush');
+  }
 
   @override
-  void didPop() {}
+  void didPop() {
+    print('didPop');
+  }
 
   @override
   void didPopNext() {
     updateController.update(selectIndex, ActiveType.Show);
+    print('didPopNext');
   }
 
   @override
   void didPushNext() {
     updateController.update(selectIndex, ActiveType.Hide);
+    print('didPushNext');
   }
 
   @override

@@ -26,7 +26,7 @@ class _MyViewState extends State<MyView> with AutomaticKeepAliveClientMixin {
       actions: [
         IconButton(
             onPressed: () {
-              Navigator.pushNamed(context, Routes.setting);
+              Routes.pushName(Routes.setting);
             },
             icon: const Icon(
               Icons.settings,

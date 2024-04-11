@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_haokezu/model/base_select_option.dart';
+import 'package:flutter_haokezu/routes.dart';
 import 'package:flutter_haokezu/utils/widget_utils/multiple_select_list.dart';
 import 'package:flutter_haokezu/utils/widget_utils/single_select_list.dart';
 
@@ -48,13 +49,13 @@ class WidgetUtils {
         options: options,
         value: value,
         onCancel: () {
-          Navigator.of(ctx).pop();
+          Routes.pop();
         },
         onConfirm: (value) {
           if (onConfirm != null) {
             onConfirm(value);
           }
-          Navigator.of(ctx).pop();
+          Routes.pop();
         },
       );
     });
@@ -69,13 +70,13 @@ class WidgetUtils {
         options: options,
         value: value,
         onCancel: () {
-          Navigator.of(context).pop();
+          Routes.pop();
         },
         onConfirm: (value) {
           if (onConfirm != null) {
             onConfirm(value);
           }
-          Navigator.of(context).pop();
+          Routes.pop();
         },
       );
     });

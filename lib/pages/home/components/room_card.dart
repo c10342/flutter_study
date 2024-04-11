@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_haokezu/components/base_image.dart';
 import 'package:flutter_haokezu/components/base_tag.dart';
+import 'package:flutter_haokezu/routes.dart';
 
 class RoomCardItem {
   final String id;
@@ -27,7 +28,7 @@ class RoomCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).pushNamed('/roomDetail/1');
+        Routes.pushName(Routes.roomDetail, params: {"roomId": "1"});
       },
       child: Container(
         padding: const EdgeInsets.all(10),

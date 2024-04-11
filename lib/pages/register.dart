@@ -40,7 +40,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   const Text('已有账号，'),
                   TextButton(
                       onPressed: () {
-                        Navigator.pushReplacementNamed(context, Routes.login);
+                        Routes.replace(Routes.login);
                       },
                       child: const Text('去登录'))
                 ],

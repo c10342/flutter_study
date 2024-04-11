@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_haokezu/components/base_image.dart';
+import 'package:flutter_haokezu/routes.dart';
 
 class InfoItem {
   final String title;
@@ -22,7 +23,7 @@ class InfoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).pushNamed('/roomDetail/1');
+        Routes.pushName(Routes.roomDetail, params: {"roomId": "1"});
       },
       child: Container(
         height: 100,

@@ -58,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
                       user.setUserInfo(
                           UserInfo(userName: userName, id: password));
                       user.setToken('token');
-                      Navigator.of(context).pop();
+                      Routes.pop();
                     }
                   },
                   child: const Text('登录')),
@@ -69,8 +69,7 @@ class _LoginPageState extends State<LoginPage> {
                   const Text('还没有账号，'),
                   TextButton(
                       onPressed: () {
-                        Navigator.pushReplacementNamed(
-                            context, Routes.register);
+                        Routes.replace(Routes.register);
                       },
                       child: const Text('去注册'))
                 ],

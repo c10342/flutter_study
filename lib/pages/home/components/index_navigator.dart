@@ -16,25 +16,25 @@ List<NavigatorItem> items = [
       title: '整租',
       image: 'static/images/home_index_navigator_total.png',
       onClick: (BuildContext context) {
-        Navigator.pushNamed(context, Routes.login);
+        Routes.pushName(Routes.login);
       }),
   NavigatorItem(
       title: '合租',
       image: 'static/images/home_index_navigator_share.png',
       onClick: (BuildContext context) {
-        Navigator.pushNamed(context, Routes.login);
+        Routes.pushName(Routes.login);
       }),
   NavigatorItem(
       title: '地图找房',
       image: 'static/images/home_index_navigator_map.png',
       onClick: (BuildContext context) {
-        Navigator.pushNamed(context, Routes.login);
+        Routes.pushName(Routes.login);
       }),
   NavigatorItem(
       title: '去出租',
       image: 'static/images/home_index_navigator_rent.png',
       onClick: (BuildContext context) {
-        Navigator.pushNamed(context, Routes.login);
+        Routes.pushName(Routes.login);
       }),
 ];
 

@@ -41,7 +41,7 @@ class _RoomManagePageState extends State<RoomManagePage> {
         floatingLocation: FloatingActionButtonLocation.centerFloat,
         floating: GestureDetector(
           onTap: () {
-            Navigator.of(context).pushNamed(Routes.roomAdd);
+            Routes.pushName(Routes.roomAdd);
           },
           child: Container(
             height: 40,
