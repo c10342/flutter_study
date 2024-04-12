@@ -1,19 +1,13 @@
-# flutter_haokezu
+# 打包
 
-A new Flutter project.
+flutter build apk --dart-define-from-file=env/uat.json --no-tree-shake-icons
 
-## Getting Started
+# 问题
 
-This project is a starting point for a Flutter application.
+```
+This application cannot tree shake icons fonts. It has non-constant instances of IconData at the following locations:
+  - file:///E:/project/flutter_haokezu/lib/components/base_icon.dart:11:7
+Target aot_android_asset_bundle failed: Error: Avoid non-constant invocations of IconData or try to build again with --no-tree-shake-icons.
+```
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-
-
-https://www.bilibili.com/video/BV18Q4y1o7nP?p=6&vd_source=f1ae259f8b7efc29b425a394ac6c2571
+这个错误通常出现在使用Flutter进行打包（release build）时，尤其是当你使用了字体图标（如FontAwesome或Material Icons），并且你的代码中有一些不能被树枝化（tree shake）的依赖。"This application cannot tree shake icons fonts. It has non-constant" 意味着你的应用程序不能移除未使用的图标字体，因为它依赖于非常量的东西。
