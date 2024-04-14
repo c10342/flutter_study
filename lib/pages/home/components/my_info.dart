@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_haokezu/generated/l10n.dart';
 import 'package:flutter_haokezu/routes.dart';
 import 'package:flutter_haokezu/state/user.dart';
 import 'package:provider/provider.dart';
@@ -15,7 +16,8 @@ class MyInfo extends StatefulWidget {
 
 class _MyInfoState extends State<MyInfo> {
   bool isLogin = true;
-  Widget noLoginView() {
+  Widget noLoginView(BuildContext context) {
+    S t = S.of(context);
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -38,7 +40,7 @@ class _MyInfoState extends State<MyInfo> {
                   onTap: () {
                     Routes.pushName(Routes.login);
                   },
-                  child: Text('登录', style: textStyle),
+                  child: Text(t.login, style: textStyle),
                 ),
                 Container(
                   margin: const EdgeInsets.only(left: 4, right: 4),
@@ -104,7 +106,7 @@ class _MyInfoState extends State<MyInfo> {
     return Container(
       height: 120,
       decoration: BoxDecoration(color: Theme.of(context).colorScheme.primary),
-      child: user.token.isNotEmpty ? loginView() : noLoginView(),
+      child: user.token.isNotEmpty ? loginView() : noLoginView(context),
     );
   }
 }

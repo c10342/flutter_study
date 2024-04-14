@@ -1,10 +1,12 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_haokezu/generated/l10n.dart';
 import 'package:flutter_haokezu/routes.dart';
 import 'package:flutter_haokezu/state/system.dart';
 import 'package:flutter_haokezu/state/user.dart';
 import 'package:flutter_haokezu/utils/helper.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -25,6 +27,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     FluroRouter router = FluroRouter();
     Routes.configureRoutes(router);
+    LanguageEnum lang = context.watch<SystemState>().lang;
     return MaterialApp(
       navigatorKey: CommonUtils.navigatorKey,
       title: '好租客',
@@ -49,6 +52,16 @@ class MyApp extends StatelessWidget {
         return router.generator(settings);
       },
       builder: EasyLoading.init(),
+      localizationsDelegates: const [
+        S.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: S.delegate.supportedLocales,
+      locale: Locale.fromSubtags(
+          languageCode: lang == LanguageEnum.en ? 'en' : 'zh',
+          countryCode: lang == LanguageEnum.zhTW ? 'TW' : null),
     );
   }
 }

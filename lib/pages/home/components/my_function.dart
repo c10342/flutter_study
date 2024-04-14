@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_haokezu/components/base_image.dart';
 import 'package:flutter_haokezu/routes.dart';
+import 'package:flutter_haokezu/state/system.dart';
 import 'package:flutter_haokezu/utils/helper.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class FunctionItem {
@@ -53,15 +55,24 @@ final List<FunctionItem> list = [
                 title: const Text('选择语言'),
                 children: [
                   SimpleDialogOption(
-                    onPressed: () {},
+                    onPressed: () {
+                      Provider.of<SystemState>(context, listen: false)
+                          .changeLang(LanguageEnum.zh);
+                    },
                     child: const Text('中文'),
                   ),
                   SimpleDialogOption(
-                    onPressed: () {},
+                    onPressed: () {
+                      Provider.of<SystemState>(context, listen: false)
+                          .changeLang(LanguageEnum.en);
+                    },
                     child: const Text('英文'),
                   ),
                   SimpleDialogOption(
-                    onPressed: () {},
+                    onPressed: () {
+                      Provider.of<SystemState>(context, listen: false)
+                          .changeLang(LanguageEnum.zhTW);
+                    },
                     child: const Text('繁体'),
                   )
                 ],

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_haokezu/components/base_form/base_input.dart';
 import 'package:flutter_haokezu/components/base_list_view.dart';
 import 'package:flutter_haokezu/components/base_page_layout.dart';
+import 'package:flutter_haokezu/generated/l10n.dart';
 import 'package:flutter_haokezu/model/user_info.dart';
 import 'package:flutter_haokezu/routes.dart';
 import 'package:flutter_haokezu/state/user.dart';
@@ -25,6 +26,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     final UserState user = Provider.of<UserState>(context);
+    S t = S.of(context);
     return BasePageLayout(
       title: '登录',
       // 苹果安全区域
@@ -61,7 +63,7 @@ class _LoginPageState extends State<LoginPage> {
                       Routes.pop();
                     }
                   },
-                  child: const Text('登录')),
+                  child: Text(t.login)),
               const Padding(padding: EdgeInsets.all(10)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

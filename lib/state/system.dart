@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
+enum LanguageEnum { zh, en, zhTW }
+
 class SystemState extends ChangeNotifier {
-  String _lang = 'zh-cn';
+  LanguageEnum _lang = LanguageEnum.zh;
 
-  String get lang => _lang;
+  LanguageEnum get lang => _lang;
 
-  void setLang(String value) {
+  void changeLang(LanguageEnum value) {
     _lang = value;
     notifyListeners();
   }
