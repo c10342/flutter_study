@@ -13,7 +13,7 @@ class FormProvider extends InheritedWidget {
     return labelWidth != oldWidget.labelWidth;
   }
 
-  // 静态方法，允许子树中的任何位置获取UpdateProvider
+  // 静态方法，允许子树中的任何位置获取FormProvider
   static FormProvider? of(BuildContext? context) {
     if (context?.dependOnInheritedWidgetOfExactType != null) {
       return context!.dependOnInheritedWidgetOfExactType<FormProvider>();

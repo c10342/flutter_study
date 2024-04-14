@@ -27,28 +27,152 @@ final List<FunctionItem> list = [
       }),
   FunctionItem(
       imageUrl: 'static/images/home_profile_order.png',
-      title: '我的订单',
-      onTap: null),
+      title: 'AlertDialog',
+      onTap: (context) {
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: const Text('警告'),
+                content: const Text('确定删除吗？'),
+                actions: [
+                  TextButton(onPressed: () {}, child: const Text('确定')),
+                  TextButton(onPressed: () {}, child: const Text('取消'))
+                ],
+              );
+            });
+      }),
   FunctionItem(
       imageUrl: 'static/images/home_profile_favor.png',
-      title: '我的收藏',
-      onTap: null),
+      title: 'SimpleDialog',
+      onTap: (context) {
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return SimpleDialog(
+                title: const Text('选择语言'),
+                children: [
+                  SimpleDialogOption(
+                    onPressed: () {},
+                    child: const Text('中文'),
+                  ),
+                  SimpleDialogOption(
+                    onPressed: () {},
+                    child: const Text('英文'),
+                  ),
+                  SimpleDialogOption(
+                    onPressed: () {},
+                    child: const Text('繁体'),
+                  )
+                ],
+              );
+            });
+      }),
   FunctionItem(
       imageUrl: 'static/images/home_profile_id.png',
-      title: '身份认证',
-      onTap: null),
+      title: 'showModalBottomSheet',
+      onTap: (context) {
+        showModalBottomSheet(
+          context: context,
+          builder: (context) {
+            return Container(
+              width: double.infinity,
+              height: 300,
+              decoration: const BoxDecoration(color: Colors.white),
+              child: const Text('显示在底部的弹框'),
+            );
+          },
+          // 底部弹出框是否支持下滑隐藏
+          enableDrag: true,
+        );
+      }),
   FunctionItem(
       imageUrl: 'static/images/home_profile_message.png',
-      title: '联系我们',
-      onTap: null),
+      title: 'CupertinoActionSheet',
+      onTap: (context) {
+        showCupertinoModalPopup(
+          context: context,
+          builder: (context) {
+            return CupertinoActionSheet(
+              title: const Text("选择操作"),
+              actions: [
+                CupertinoActionSheetAction(
+                  onPressed: () {
+                    // 处理操作1
+                  },
+                  child: const Text("操作1"),
+                ),
+                CupertinoActionSheetAction(
+                  onPressed: () {
+                    // 处理操作2
+                  },
+                  child: const Text("操作2"),
+                ),
+              ],
+              cancelButton: CupertinoActionSheetAction(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text("取消"),
+              ),
+            );
+          },
+        );
+      }),
   FunctionItem(
       imageUrl: 'static/images/home_profile_contract.png',
-      title: '电子合同',
-      onTap: null),
+      title: 'CupertinoPicker',
+      onTap: (context) {
+        showCupertinoModalPopup(
+          context: context,
+          builder: (context) {
+            return Container(
+              height: 200,
+              decoration: const BoxDecoration(color: Colors.white),
+              child: CupertinoPicker(
+                itemExtent: 40,
+                onSelectedItemChanged: (int index) {
+                  // 处理选中项的改变
+                },
+                children: const [
+                  Text("选项1"),
+                  Text("选项2"),
+                  Text("选项3"),
+                ],
+              ),
+            );
+          },
+        );
+      }),
   FunctionItem(
       imageUrl: 'static/images/home_profile_wallet.png',
-      title: '钱包',
-      onTap: null),
+      title: 'Dialog',
+      onTap: (context) {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return Dialog(
+              child: Container(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Text("自定义对话框示例"),
+                    const SizedBox(height: 10),
+                    const Text("这是自定义的内容。"),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text("关闭"),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      }),
   FunctionItem(
       imageUrl: 'static/images/home_profile_house.png',
       title: "房屋管理",
